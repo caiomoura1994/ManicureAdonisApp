@@ -6,6 +6,7 @@ import AnimatedGradient from './AnimatedGradient';
 import { Logo } from './Logo';
 import { Container } from './Container';
 import { Content } from './Content';
+import { Input } from './Input';
 
 export {
   Button,
@@ -22,4 +23,5 @@ export {
   Logo,
   Container,
   Content,
+  Input,
 };

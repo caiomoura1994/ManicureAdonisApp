@@ -63,6 +63,18 @@ const theme = {
   // ** CONTENT **
   $CONTENT_COLOR: colors.$THIRD_COLOR,
   $CONTENT_MARGIN_HORIZONTAL: 16,
+
+  // ** INPUT **
+  $INPUT_HEIGHT: 46,
+  $INPUT_BACKGROUND: '#fff',
+  $INPUT_ICON_SIZE: 20,
+  $INPUT_VALID_ICON: 'md-checkmark',
+  $INPUT_WARN_ICON: 'md-alert',
+  $INPUT_ERROR_ICON: 'md-close',
+  $INPUT_NORMAL_COLOR: '#bdc1cc',
+  $INPUT_VALID_COLOR: '#66bd2b',
+  $INPUT_WARN_COLOR: '#ff8c2f',
+  $INPUT_ERROR_COLOR: '#e03126',
 };
 
 export { theme, colors };

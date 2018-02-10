@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View } from 'react-native';
 
 import strings from '../../config/strings';
@@ -32,7 +33,11 @@ class Onboarding extends React.Component {
           </View>
           {/* SECTION BUTTONS */}
           <View style={styles.sectionButton}>
-            <Button kind="rounded" animation="fadeInRight">
+            <Button
+              kind="rounded"
+              animation="fadeInRight"
+              onPress={() => this.props.navigation.navigate('SignUp')}
+            >
               {strings.startNow}
             </Button>
             <Button
@@ -50,5 +55,9 @@ class Onboarding extends React.Component {
     );
   }
 }
+
+Onboarding.propTypes = {
+  navigation: PropTypes.object,
+};
 
 export default Onboarding;
