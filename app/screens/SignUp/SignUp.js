@@ -12,6 +12,7 @@ class SignUp extends React.Component {
         <Content>
           <View style={{ flex: 1, justifyContent: 'center' }}>
             <Input placeholder="Nome" />
+            <Input placeholder="Nome" />
           </View>
         </Content>
       </Container>

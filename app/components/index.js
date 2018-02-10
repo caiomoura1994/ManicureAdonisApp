@@ -7,6 +7,7 @@ import { Logo } from './Logo';
 import { Container } from './Container';
 import { Content } from './Content';
 import { Input } from './Input';
+import { AvatarCircle } from './AvatarCircle';
 
 export {
   Button,
@@ -23,5 +24,6 @@ export {
   Logo,
   Container,
   Content,
+  AvatarCircle,
   Input,
 };
