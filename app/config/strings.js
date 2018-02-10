@@ -60,6 +60,7 @@ const strings = new LocalizedStrings({
     plans: 'Planos',
     invalidDependent: 'Nome Dependente Inválido',
     InvalidDateBirth: 'Invalid date of birth',
+    forgotPassword: 'Esqueceu a senha?',
   },
   en: {
     welcome: 'Welcome',
@@ -120,6 +121,7 @@ const strings = new LocalizedStrings({
     plans: 'Plans',
     invalidDependent: 'Invalid Dependent Name',
     InvalidDateBirth: 'Invalid date of birth',
+    forgotPassword: 'forgot password?',
   },
 });
 

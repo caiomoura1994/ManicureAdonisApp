@@ -1,4 +1,5 @@
 import { Onboarding } from './Onboarding';
 import { SignUp } from './SignUp';
+import { Login } from './Login';
 
-export { Onboarding, SignUp };
+export { Onboarding, SignUp, Login };

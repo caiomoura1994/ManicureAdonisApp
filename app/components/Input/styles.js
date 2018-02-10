@@ -13,6 +13,7 @@ export default EStyleSheet.create({
     textAlign: 'center',
     padding: 10,
     paddingHorizontal: 20,
+    marginVertical: 10,
   },
   inputShadow: {
     shadowColor: '$BUTTON_SHADOW_COLOR',
