@@ -1,45 +1,31 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
+import { theme } from '../../config/theme';
+
 export default EStyleSheet.create({
-  base: { alignSelf: 'stretch', borderWidth: 1 },
-  normal: {
-    backgroundColor: '$INPUT_BACKGROUND',
-    borderColor: '$INPUT_NORMAL_COLOR',
-    borderStyle: 'solid',
-  },
-  disabled: { opacity: 0.2 },
-  valid: {
-    borderColor: '$INPUT_VALID_COLOR',
-    borderStyle: 'solid',
-  },
-  error: {
-    borderColor: '$INPUT_ERROR_COLOR',
-    borderStyle: 'solid',
-  },
-  warn: {
-    borderColor: '$INPUT_WARN_COLOR',
-    borderStyle: 'solid',
-  },
   input: {
-    borderColor: 'transparent',
-    paddingLeft: 12,
-    paddingRight: 6,
+    backgroundColor: '$INPUT_BACKGROUND',
+    height: 45,
+    justifyContent: 'center',
+    elevation: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    textAlign: 'center',
+    padding: 10,
+    paddingHorizontal: 20,
   },
-  icon: {
-    top: 12,
-    right: 12,
-    position: 'absolute',
-    backgroundColor: 'transparent',
+  inputShadow: {
+    shadowColor: '$BUTTON_SHADOW_COLOR',
+    shadowOffset: {
+      width: theme.$BUTTON_SHADOW_OFFSET_WIDTH,
+      height: theme.$BUTTON_SHADOW_OFFSET_HEIGHT,
+    },
+    shadowRadius: '$BUTTON_SHADOW_RADIUS',
+    shadowOpacity: '$BUTTON_SHADOW_OPACITY',
+    elevation: 2,
   },
-  // iconStates: {
-  //   valid: '$INPUT_VALID_ICON',
-  //   warn: '$INPUT_WARN_ICON',
-  //   error: theme.INPUT_ERROR_ICON,
-  // },
-  // colorStates: {
-  //   normal: theme.INPUT_NORMAL_COLOR,
-  //   valid: theme.INPUT_VALID_COLOR,
-  //   warn: theme.INPUT_WARN_COLOR,
-  //   error: theme.INPUT_ERROR_COLOR,
-  // },
+  inputRounded: {
+    borderRadius: '$BUTTON_ROUNDED_RADIUS',
+    height: '$BUTTON_ROUNDED_HEIGHT',
+  },
 });
