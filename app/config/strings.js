@@ -3,7 +3,7 @@ import LocalizedStrings from 'react-native-localization';
 const strings = new LocalizedStrings({
   pt: {
     welcome: 'Bem Vindo',
-    findProfessionals: 'Encontre profissionais de saúde e marque consultas.',
+    findServices: 'Encontre e contrate serviços de estética aonde você estiver.',
     startNow: 'Comece já!',
     login: 'Entrar',
     singUp: 'Cadastre-se',
@@ -63,7 +63,7 @@ const strings = new LocalizedStrings({
   },
   en: {
     welcome: 'Welcome',
-    findProfessionals: 'Find health professionals and schedule consultations.',
+    findServices: 'Find and contract aesthetic services wherever you are.',
     startNow: 'Start now!',
     login: 'Login',
     singUp: 'Sign up',

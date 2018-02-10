@@ -3,10 +3,11 @@ import { Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
 const colors = {
-  $PRIMARY_COLOR: '#25A328',
-  $SECOND_COLOR: '#279EAE',
-  $FIFTH_COLOR: '#eff0f5',
-  $GRADIENT_ANIMATED_COLOR: ['#25a328', '#86ff89', '#279eae', '#279eae'],
+  $PRIMARY_COLOR: '#e84c5d',
+  $SECOND_COLOR: '#3288b2',
+  $THIRD_COLOR: '#eff0f5',
+  $WARN_COLOR: '#ff9c00',
+  $GRADIENT_ANIMATED_COLOR: ['#e84c5d', '#F57244', '#FF5C47', '#3288b2'],
 };
 
 const theme = {
@@ -19,7 +20,7 @@ const theme = {
   $BUTTON_SQUARED_HEIGHT: 45,
   $BUTTON_SQUARED_FONT_SIZE: 12,
   $BUTTON_STATE_SUCCESS: colors.$PRIMARY_COLOR,
-  $BUTTON_STATE_DANGER: '#ff9c00',
+  $BUTTON_STATE_DANGER: colors.$WARN_COLOR,
   $BUTTON_STATE_PRIMARY: colors.$SECOND_COLOR,
   $BUTTON_SHADOW_COLOR: '#000',
   $BUTTON_SHADOW_OPACITY: 0.3,
@@ -56,11 +57,11 @@ const theme = {
   $SECTION_ROUNDED_BOTTOM_COLOR: colors.$PRIMARY_COLOR,
 
   // ** CONTAINER **
-  $CONTAINER_COLOR: colors.$FIFTH_COLOR,
+  $CONTAINER_COLOR: colors.$THIRD_COLOR,
   $CONTAINER_HEIGHT: height,
 
   // ** CONTENT **
-  $CONTENT_COLOR: colors.$FIFTH_COLOR,
+  $CONTENT_COLOR: colors.$THIRD_COLOR,
   $CONTENT_MARGIN_HORIZONTAL: 16,
 };
 

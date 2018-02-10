@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Image } from 'react-native';
+import { Image } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import { H1 } from '../Typography';
 
 import styles from './styles';
 
 class Logo extends React.Component {
-  applyLetterSpacing = (string, count = 1) => string.split('').join('\u200A'.repeat(count));
-
   render() {
     const {
-      logoName,
       animation,
       duration,
       delay,
@@ -39,22 +35,7 @@ class Logo extends React.Component {
 
     return (
       <Animatable.View style={styles.container} {...animatableProps}>
-        <Image
-          resizeMode="contain"
-          style={styles.logo}
-          source={require('./images/helpHereLogoBranca.png')}
-        />
-        <View style={logoName ? styles.innerContainer : styles.textDisabled}>
-          <H1 style={styles.text} fontWeight="bold">
-            {this.applyLetterSpacing('Help', 3)}
-          </H1>
-          <H1>
-            {this.applyLetterSpacing(' ', 3)}
-          </H1>
-          <H1 style={styles.text}>
-            {this.applyLetterSpacing('Here', 3)}
-          </H1>
-        </View>
+        <Image resizeMode="contain" style={styles.logo} source={require('./images/Adonis.png')} />
       </Animatable.View>
     );
   }

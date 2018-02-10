@@ -27,7 +27,7 @@ class Onboarding extends React.Component {
               {strings.welcome}
             </H1>
             <H4 style={styles.subTitleWelcome} italic animation="zoomIn">
-              {strings.findProfessionals}
+              {strings.findServices}
             </H4>
           </View>
           {/* SECTION BUTTONS */}
