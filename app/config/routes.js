@@ -1,13 +1,36 @@
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 import { Onboarding, SignUp, Login } from '../screens';
+import { Home, Chat, Calendar, Profile, Search } from '../screens/TabsContainer';
 
-export default StackNavigator(
+const tabNavigator = TabNavigator({
+  Home: {
+    screen: Home,
+  },
+  Chat: {
+    screen: Chat,
+  },
+  Calendar: {
+    screen: Calendar,
+  },
+  Profile: {
+    screen: Profile,
+  },
+  Search: {
+    screen: Search,
+  },
+});
+
+const stackNavigator = StackNavigator(
   {
     Onboarding: {
       screen: Onboarding,
       navigationOptions: {
         header: () => null,
       },
+    },
+    TabsContainer: {
+      screen: tabNavigator,
+      navigationOptions: { headerMode: 'none' },
     },
     Login: {
       screen: Login,
@@ -26,3 +49,5 @@ export default StackNavigator(
     mode: 'modal',
   },
 );
+
+export default stackNavigator;

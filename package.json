@@ -21,7 +21,7 @@
     "react-native-linear-gradient": "^2.4.0",
     "react-native-localization": "^0.2.3",
     "react-native-vector-icons": "^4.5.0",
-    "react-navigation": "^1.0.3",
+    "react-navigation": "git+https://github.com/react-community/react-navigation.git",
     "rgb2hex": "^0.1.0"
   },
   "devDependencies": {

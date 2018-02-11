@@ -3,9 +3,8 @@ import { View } from 'react-native';
 import { Container, Content, Input } from '../../../components';
 
 import strings from '../../../config/strings';
-import styles from './styles';
 
-class Profile extends React.Component {
+class Calendar extends React.Component {
   render() {
     return (
       <Container>
@@ -20,4 +19,4 @@ class Profile extends React.Component {
   }
 }
 
-export default Profile;
+export default Calendar;

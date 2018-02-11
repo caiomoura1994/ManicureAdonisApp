@@ -3,21 +3,17 @@ import { View } from 'react-native';
 import { Container, Content, Input } from '../../../components';
 
 import strings from '../../../config/strings';
-import styles from './styles';
 
-class Calendar extends React.Component {
+class Search extends React.Component {
   render() {
     return (
       <Container>
         <Content>
-          <View style={{ flex: 1, justifyContent: 'center' }}>
-            <Input placeholder="Nome" />
-            <Input placeholder="Nome" />
-          </View>
+          <View style={{ flex: 1, justifyContent: 'center' }} />
         </Content>
       </Container>
     );
   }
 }
 
-export default Calendar;
+export default Search;

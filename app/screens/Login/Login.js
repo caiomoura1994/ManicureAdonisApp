@@ -44,7 +44,11 @@ class Login extends React.Component {
           </View>
           {/* SECTION BUTTONS */}
           <View style={styles.sectionButton}>
-            <Button kind="rounded" animation="fadeInRight">
+            <Button
+              kind="rounded"
+              animation="fadeInRight"
+              onPress={() => this.props.navigation.navigate('TabsContainer')}
+            >
               {strings.enterInApp}
             </Button>
             <Button
