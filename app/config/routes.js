@@ -30,7 +30,10 @@ const stackNavigator = StackNavigator(
     },
     TabsContainer: {
       screen: tabNavigator,
-      navigationOptions: { headerMode: 'none' },
+      navigationOptions: {
+        headerLeft: null,
+        headerMode: 'none',
+      },
     },
     Login: {
       screen: Login,
