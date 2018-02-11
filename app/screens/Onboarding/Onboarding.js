@@ -46,6 +46,7 @@ class Onboarding extends React.Component {
               textStyle={styles.buttonTextEntrar}
               type="naked"
               shadow={false}
+              onPress={() => this.props.navigation.navigate('Login')}
             >
               {strings.login}
             </Button>

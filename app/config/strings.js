@@ -61,6 +61,7 @@ const strings = new LocalizedStrings({
     invalidDependent: 'Nome Dependente Inválido',
     InvalidDateBirth: 'Invalid date of birth',
     forgotPassword: 'Esqueceu a senha?',
+    enterInApp: 'Entrar',
   },
   en: {
     welcome: 'Welcome',
@@ -122,6 +123,7 @@ const strings = new LocalizedStrings({
     invalidDependent: 'Invalid Dependent Name',
     InvalidDateBirth: 'Invalid date of birth',
     forgotPassword: 'forgot password?',
+    enterInApp: 'Enter',
   },
 });
 

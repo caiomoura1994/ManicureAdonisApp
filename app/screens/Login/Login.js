@@ -12,6 +12,8 @@ import {
   H4,
   Button,
   Input,
+  AvatarCircle,
+  Icon,
 } from '../../components';
 import { colors } from '../../config/theme';
 
@@ -32,19 +34,18 @@ class Login extends React.Component {
         <Content style={styles.content}>
           {/* SECTION WELCOME */}
           <View style={styles.sectionWelcome}>
-            <H1 style={styles.titleWelcome} fontWeight="bold" animation="fadeInDown">
-              {strings.welcome}
-            </H1>
-            <H4 style={styles.subTitleWelcome} italic animation="zoomIn">
-              {strings.findServices}
-            </H4>
+            <View style={{ alignItems: 'center' }}>
+              <AvatarCircle>
+                <Icon iconType="FontAwesome" name="user" size={60} />
+              </AvatarCircle>
+            </View>
             <Input placeholder="E-mail" />
             <Input placeholder="Senha" />
           </View>
           {/* SECTION BUTTONS */}
           <View style={styles.sectionButton}>
             <Button kind="rounded" animation="fadeInRight">
-              {strings.startNow}
+              {strings.enterInApp}
             </Button>
             <Button
               animation="fadeInLeft"
