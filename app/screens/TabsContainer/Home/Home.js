@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, SectionList, FlatList } from 'react-native';
+import { View, SectionList, FlatList, Image } from 'react-native';
 import { AvatarCircle, Container, Content, Input, Text, Icon } from '../../../components';
 
 import strings from '../../../config/strings';
-import categoriesMock from '../../../config/mock';
+import categoriesMock from '../../../config/mocks/categoriesMock';
+import professionalsMock from '../../../config/mocks/professionalsMock';
 import styles from './styles';
 
 const categories = categoriesMock;
+const bestProfessionals = professionalsMock;
 
 class Home extends React.Component {
   render() {
@@ -22,23 +24,21 @@ class Home extends React.Component {
               sections={[
                 {
                   title: 'Recomendado',
-                  data: [
-                    { key: 'a', category: 'test', price: 1.99 },
-                    { key: 'b', category: 'test', price: 1.99 },
-                    { key: 'a1', category: 'test', price: 1.99 },
-                    { key: '2', category: 'test', price: 1.99 },
-                    { key: 'a4', category: 'test', price: 1.99 },
-                    { key: '3', category: 'test', price: 1.99 },
-                  ],
+                  data: bestProfessionals,
                 },
               ]}
               renderItem={({ item }) => (
                 <View style={styles.viewOnHigh}>
                   <AvatarCircle>
-                    <Icon iconType="FontAwesome" name="user" size={60} />
+                  <Image
+                    style={{ width: 50, height: 50 }}
+                    source={{
+                      uri: item.avatar,
+                    }}
+                  />
                   </AvatarCircle>
-                  <Text style={styles.textOnHigh}> {item.category} </Text>
-                  <Text style={styles.textPriceOnHigh}> A partir de R${item.price} </Text>
+                  <Text style={styles.textOnHigh}> {item.name} </Text>
+                  <Text style={styles.textPriceOnHigh}> Media{item.average_reputation} </Text>
                 </View>
               )}
             />

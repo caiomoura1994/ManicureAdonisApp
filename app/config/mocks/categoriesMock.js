@@ -12,10 +12,10 @@ const categoriesMock = [
         price: 20.0,
         uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png',
         professional: {
+          id: 1,
           avatar:
             'https://lh3.googleusercontent.com/-DG3l5nRUvH4/AAAAAAAAAAI/AAAAAAAAAFs/sZxS069VKig/s180-c-k-no/photo.jpg',
-          key: 2,
-          id: 1,
+          key: 1,
           name: 'Matheus Souza Lima',
           average_reputation: 5.0,
           hygiene: 10,
