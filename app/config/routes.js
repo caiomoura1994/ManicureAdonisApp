@@ -1,7 +1,6 @@
 import { StackNavigator, TabNavigator } from 'react-navigation';
-import { Onboarding, SignUp, Login } from '../screens';
+import { Onboarding, SignUp, Login, ListProfessionalsOfCategory } from '../screens';
 import { Home, Chat, Calendar, Profile, Search } from '../screens/TabsContainer';
-// import Icon from '../components';
 
 const tabNavigator = TabNavigator({
   Home: {
@@ -48,12 +47,18 @@ const tabNavigator = TabNavigator({
 
 const stackNavigator = StackNavigator(
   {
-    // test: {
-    //   screen: Home,
-    //   navigationOptions: {
-    //     header: () => null,
-    //   },
-    // },
+    test: {
+      screen: Home,
+      navigationOptions: {
+        header: () => null,
+      },
+    },
+    ListProfessionalsOfCategory: {
+      screen: ListProfessionalsOfCategory,
+      navigationOptions: {
+        header: () => null,
+      },
+    },
     Onboarding: {
       screen: Onboarding,
       navigationOptions: {

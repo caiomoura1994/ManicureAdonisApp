@@ -3,7 +3,10 @@ import { View, SectionList, FlatList } from 'react-native';
 import { AvatarCircle, Container, Content, Input, Text, Icon } from '../../../components';
 
 import strings from '../../../config/strings';
+import categoriesMock from '../../../config/mock';
 import styles from './styles';
+
+const categories = categoriesMock;
 
 class Home extends React.Component {
   render() {
@@ -46,23 +49,23 @@ class Home extends React.Component {
               sections={[
                 {
                   title: 'Categorias',
-                  data: [
-                    { key: 'a', category: 'test', price: 1.99 },
-                    { key: 'b', category: 'test', price: 1.99 },
-                    { key: 'a1', category: 'test', price: 1.99 },
-                    { key: '2', category: 'test', price: 1.99 },
-                    { key: 'a4', category: 'test', price: 1.99 },
-                    { key: '3', category: 'test', price: 1.99 },
-                  ],
+                  data: categories,
                 },
               ]}
               renderItem={({ item }) => (
                 <View>
-                  <AvatarCircle>
-                    <Icon iconType="FontAwesome" name="user" size={60} />
+                  <AvatarCircle
+                    onPress={() =>
+                      this.props.navigation.navigate('ListProfessionalsOfCategory', {
+                        item,
+                        name: 'Categorias',
+                      })
+                    }
+                  >
+                    <Icon iconType="FontAwesome" name={item.icon} size={60} />
                   </AvatarCircle>
-                  <Text style={styles.textCategory}> {item.category} </Text>
-                  <Text style={styles.textPrice}> A partir de R${item.price} </Text>
+                  <Text style={styles.textCategory}> {item.name} </Text>
+                  <Text style={styles.textPrice}> A partir de R${item.minimal_price} </Text>
                 </View>
               )}
               renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
