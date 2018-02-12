@@ -1,7 +1,34 @@
 import { StackNavigator, TabNavigator } from 'react-navigation';
-import { Onboarding, SignUp, Login, ListProfessionalsOfCategory } from '../screens';
+import {
+  Onboarding,
+  SignUp,
+  Login,
+  ListProfessionalsOfCategory,
+  ProfessionalOffline,
+} from '../screens';
 import { Home, Chat, Calendar, Profile, Search } from '../screens/TabsContainer';
 
+const tabNavigatorProfessionals = TabNavigator(
+  {
+    ProfessionalOnline: {
+      screen: ListProfessionalsOfCategory,
+      navigationOptions: {
+        header: null,
+        title: 'ProfessionalOnline',
+      },
+    },
+    ProfessionalOffline: {
+      screen: ProfessionalOffline,
+      navigationOptions: {
+        header: null,
+        title: 'ProfessionalOffline',
+      },
+    },
+  },
+  {
+    tabBarPosition: 'top',
+  },
+);
 const tabNavigator = TabNavigator({
   Home: {
     screen: Home,
@@ -53,14 +80,14 @@ const stackNavigator = StackNavigator(
         header: () => null,
       },
     },
-    ListProfessionalsOfCategory: {
-      screen: ListProfessionalsOfCategory,
+    Onboarding: {
+      screen: Onboarding,
       navigationOptions: {
         header: () => null,
       },
     },
-    Onboarding: {
-      screen: Onboarding,
+    ListProfessionalsOfCategory: {
+      screen: tabNavigatorProfessionals,
       navigationOptions: {
         header: () => null,
       },
