@@ -30,12 +30,12 @@ class Home extends React.Component {
               renderItem={({ item }) => (
                 <View style={styles.viewOnHigh}>
                   <AvatarCircle>
-                  <Image
-                    style={{ width: 50, height: 50 }}
-                    source={{
-                      uri: item.avatar,
-                    }}
-                  />
+                    <Image
+                      style={{ width: 50, height: 50 }}
+                      source={{
+                        uri: item.avatar,
+                      }}
+                    />
                   </AvatarCircle>
                   <Text style={styles.textOnHigh}> {item.name} </Text>
                   <Text style={styles.textPriceOnHigh}> Media{item.average_reputation} </Text>
@@ -54,15 +54,18 @@ class Home extends React.Component {
               ]}
               renderItem={({ item }) => (
                 <View>
-                  <AvatarCircle
-                    onPress={() =>
-                      this.props.navigation.navigate('ListProfessionalsOfCategory', {
-                        item,
-                        name: 'Categorias',
-                      })
-                    }
-                  >
-                    <Icon iconType="FontAwesome" name={item.icon} size={60} />
+                  <AvatarCircle>
+                    <Icon
+                      iconType="FontAwesome"
+                      name={item.icon}
+                      size={60}
+                      onPress={() =>
+                        this.props.navigation.navigate('ListProfessionalsOfCategory', {
+                          item,
+                          name: 'Categorias',
+                        })
+                      }
+                    />
                   </AvatarCircle>
                   <Text style={styles.textCategory}> {item.name} </Text>
                   <Text style={styles.textPrice}> A partir de R${item.minimal_price} </Text>

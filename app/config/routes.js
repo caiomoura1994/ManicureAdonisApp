@@ -73,7 +73,7 @@ const tabNavigator = TabNavigator(
         header: null,
         showIcon: true,
         title: 'PESQUISAR',
-        tabBarIcon: () => <Icon name="check" />,
+        // tabBarIcon: () => <Icon name="check" />,
         // tabBarIcon: () => <Icon name="home" />,
         // tabBarIcon: <Icon name="home" />,
       },
