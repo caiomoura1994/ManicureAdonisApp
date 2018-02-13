@@ -69,7 +69,9 @@ class ListProfessionalsOfCategory extends React.Component {
                                                 }),
                                             style: 'cancel',
                                           },
-                                        ])
+                                        ],
+                          { cancelable: false },
+                        )
                                 }, 5000) },
                           ],
                           { cancelable: false },
