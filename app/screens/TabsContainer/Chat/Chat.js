@@ -3,48 +3,34 @@ import { View, FlatList, Alert } from 'react-native';
 import { Container, Content, Input, Text, Button } from '../../../components';
 
 import strings from '../../../config/strings';
+import chatsMock from '../../../config/mocks/chatsMock';
+import professionalsMock from '../../../config/mocks/professionalsMock';
 import styles from './styles';
 
 class Chat extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    // console.warn(chatsMock);
     return (
       <Container>
-        <Text> Estes profissionais de estão online Agora!</Text>
+        <Text> Meus Chats </Text>
         <Content>
           <View style={{ flex: 1, justifyContent: 'center' }}>
             <FlatList
-              data={[1, 2, 3]}
+              data={chatsMock}
               renderItem={({ item }) => (
                 <View style={styles.viewObjectChatList}>
-                  <Text>Preço</Text>
+                  <Text>{item.last_message}</Text>
                   <Button
-                    title="Learn More"
                     color="#841584"
-                    onPress={
-                      () =>
-                        Alert.alert(
-                          'Contrate já, ',
-                          'Aguarde a resposta de',
-                          [
-                            {
-                              text: 'Cancelar',
-                              onPress: () => console.log('Cancel Pressed'),
-                              style: 'cancel',
-                            },
-                            {
-                              text: 'Contratar',
-                              onPress: () => setTimeout(() => {}, 5000),
-                            },
-                          ],
-                          { cancelable: false },
-                        )
-                      //   this.props.navigation.navigate('ListProfessionalsOfCategory', {
-                      //     item,
-                      //     name: 'Categorias',
-                      //   })
+                    onPress={() =>
+                      this.props.navigation.navigate('ChatConversation', { itemChat: item })
                     }
                   >
-                    Contratar agora!
+                    Ir para o Chat
                   </Button>
                 </View>
               )}

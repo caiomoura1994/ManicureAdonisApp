@@ -7,7 +7,7 @@ import {
   ListProfessionalsOfCategory,
   ProfessionalOffline,
 } from '../screens';
-import { Home, Chat, Calendar, Profile, Search } from '../screens/TabsContainer';
+import { Home, Chat, ChatConversation, Calendar, Profile, Search } from '../screens/TabsContainer';
 import Icon from 'react-native-vector-icons/Ionicons';
 // import { Icon } from '../components';
 
@@ -94,6 +94,12 @@ const stackNavigator = StackNavigator(
     // },
     Onboarding: {
       screen: Onboarding,
+      navigationOptions: {
+        header: () => null,
+      },
+    },
+    ChatConversation: {
+      screen: ChatConversation,
       navigationOptions: {
         header: () => null,
       },

@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { ChatConversation } from './ChatConversation';
 
 export default EStyleSheet.create({
   // HEADER
