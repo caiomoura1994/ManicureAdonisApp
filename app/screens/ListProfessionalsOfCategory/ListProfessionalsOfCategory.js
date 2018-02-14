@@ -43,36 +43,39 @@ class ListProfessionalsOfCategory extends React.Component {
                     onPress={
                       () =>
                         Alert.alert(
-                          "Contrate já, ",
-                          'Aguarde a resposta de '+item.professional.name + " por apenas R$"+item.price,
-                          [{
+                          'Contrate já, ',
+                          `Aguarde a resposta de ${item.professional.name} por apenas R$${
+                            item.price
+                          }`,
+                          [
+                            {
                               text: 'Cancelar',
                               onPress: () => console.log('Cancel Pressed'),
                               style: 'cancel',
                             },
-                            { text: 'Contratar', onPress: () => 
+                            {
+                              text: 'Contratar',
+                              onPress: () =>
                                 setTimeout(() => {
-                                    Alert.alert(
-                                        "Estou lhe esperando!",
-                                        item.professional.name + " está a caminho!",
-                                        [
-                                            {
-                                            text: 'Cancelar',
-                                            onPress: () => console.log('Cancel Pressed'),
-                                            style: 'cancel',
-                                          },
-                                            {
-                                            text: 'Ir para o chat',
-                                            onPress: () => 
-                                                this.props.navigation.navigate('Chat', {
-                                                item,
-                                                }),
-                                            style: 'cancel',
-                                          },
-                                        ],
-                          { cancelable: false },
-                        )
-                                }, 5000) },
+                                  Alert.alert(
+                                    'Estou lhe esperando!',
+                                    `${item.professional.name} está a caminho!`,
+                                    [
+                                      {
+                                        text: 'Cancelar',
+                                        onPress: () => console.log('Cancel Pressed'),
+                                        style: 'cancel',
+                                      },
+                                      {
+                                        text: 'Ir para o perfil dele(a)',
+                                        onPress: () =>
+                                          this.props.navigation.navigate('ProfessionalProfile',{professionalId:item.professional}),
+                                      },
+                                    ],
+                                    { cancelable: false },
+                                  );
+                                }, 5000),
+                            },
                           ],
                           { cancelable: false },
                         )

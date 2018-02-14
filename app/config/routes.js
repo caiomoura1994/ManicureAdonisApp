@@ -6,6 +6,7 @@ import {
   Login,
   ListProfessionalsOfCategory,
   ProfessionalOffline,
+  ProfessionalProfile,
 } from '../screens';
 import { Home, Chat, ChatConversation, Calendar, Profile, Search } from '../screens/TabsContainer';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -20,13 +21,13 @@ const tabNavigatorProfessionals = TabNavigator(
         title: 'ProfessionalOnline',
       },
     },
-    ProfessionalOffline: {
-      screen: ProfessionalOffline,
-      navigationOptions: {
-        header: null,
-        title: 'ProfessionalOffline',
-      },
-    },
+    // ProfessionalOffline: {
+    //   screen: ProfessionalOffline,
+    //   navigationOptions: {
+    //     header: null,
+    //     title: 'ProfessionalOffline',
+    //   },
+    // },
   },
   {
     tabBarPosition: 'top',
@@ -43,22 +44,22 @@ const tabNavigator = TabNavigator(
         // tabBarIcon: () => <Icon name="person-pin-circle" size={25} color="white" />,
       },
     },
-    Chat: {
-      screen: Chat,
-      navigationOptions: {
-        header: null,
-        title: 'CHAT',
-        // tabBarIcon: () => <Icon name="person-pin-circle" size={25} color="white" />,
-      },
-    },
-    Calendar: {
-      screen: Calendar,
-      navigationOptions: {
-        header: null,
-        title: 'CALENDARIO',
-        // tabBarIcon: () => <Icon name="person-pin-circle" size={25} color="white" />,
-      },
-    },
+    // Chat: {
+    //   screen: Chat,
+    //   navigationOptions: {
+    //     header: null,
+    //     title: 'CHAT',
+    //     // tabBarIcon: () => <Icon name="person-pin-circle" size={25} color="white" />,
+    //   },
+    // },
+    // Calendar: {
+    //   screen: Calendar,
+    //   navigationOptions: {
+    //     header: null,
+    //     title: 'CALENDARIO',
+    //     // tabBarIcon: () => <Icon name="person-pin-circle" size={25} color="white" />,
+    //   },
+    // },
     Profile: {
       screen: Profile,
       navigationOptions: {
@@ -67,17 +68,17 @@ const tabNavigator = TabNavigator(
         // tabBarIcon: () => <Icon name="person-pin-circle" size={25} color="white" />,
       },
     },
-    Search: {
-      screen: Search,
-      navigationOptions: {
-        header: null,
-        showIcon: true,
-        title: 'PESQUISAR',
-        // tabBarIcon: () => <Icon name="check" />,
-        // tabBarIcon: () => <Icon name="home" />,
-        // tabBarIcon: <Icon name="home" />,
-      },
-    },
+    // Search: {
+    //   screen: Search,
+    //   navigationOptions: {
+    //     header: null,
+    //     showIcon: true,
+    //     title: 'PESQUISAR',
+    //     // tabBarIcon: () => <Icon name="check" />,
+    //     // tabBarIcon: () => <Icon name="home" />,
+    //     // tabBarIcon: <Icon name="home" />,
+    //   },
+    // },
   },
   {
     tabBarPosition: 'bottom',
@@ -94,6 +95,12 @@ const stackNavigator = StackNavigator(
     // },
     Onboarding: {
       screen: Onboarding,
+      navigationOptions: {
+        header: () => null,
+      },
+    },
+    ProfessionalProfile: {
+      screen: ProfessionalProfile,
       navigationOptions: {
         header: () => null,
       },

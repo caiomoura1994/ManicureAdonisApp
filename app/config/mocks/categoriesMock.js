@@ -14,6 +14,7 @@ const categoriesMock = [
         professional: {
           id: 1,
           key: 1,
+          phone: '(71)33213333',
           avatar:
             'https://lh3.googleusercontent.com/-DG3l5nRUvH4/AAAAAAAAAAI/AAAAAAAAAFs/sZxS069VKig/s180-c-k-no/photo.jpg',
           name: 'Matheus Souza Lima',
