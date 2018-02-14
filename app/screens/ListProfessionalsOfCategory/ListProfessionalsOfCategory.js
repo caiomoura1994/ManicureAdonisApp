@@ -69,7 +69,9 @@ class ListProfessionalsOfCategory extends React.Component {
                                       {
                                         text: 'Ir para o perfil dele(a)',
                                         onPress: () =>
-                                          this.props.navigation.navigate('ProfessionalProfile',{professionalId:item.professional}),
+                                          this.props.navigation.navigate('ProfessionalProfile', {
+                                            professionalId: item.professional.id,
+                                          }),
                                       },
                                     ],
                                     { cancelable: false },

@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, FlatList, Image } from 'react-native';
-import { Container, Content, Input, Text, AvatarCircle, Icon } from '../../../components';
+import { Container, Content, Input, Text, AvatarCircle, Icon, Button } from '../../../components';
 
 import strings from '../../../config/strings';
+import servicesMock from '../../../config/mocks/servicesMock';
+import professionalsMock from '../../../config/mocks/professionalsMock';
 
 class Profile extends React.Component {
   render() {
@@ -21,24 +23,28 @@ class Profile extends React.Component {
         </View>
         <Content>
           <View style={{ flex: 1, justifyContent: 'center' }}>
+            <Text>Historico</Text>
             <FlatList
-              data={[
-                { key: 'a', status: 'Em andamento (71) 9 8888-8888', icon: 'home' },
-                { key: 'b', status: 'Finalizado', icon: 'add' },
-              ]}
+              data={servicesMock}
               renderItem={({ item }) => (
                 <View style={{ flexDirection: 'row' }}>
-                  <AvatarCircle>
+                  <AvatarCircle
+                    onPress={() =>
+                      this.props.navigation.navigate('ProfessionalProfile', {
+                        professionalId: item.professionalId,
+                      })
+                    }
+                  >
                     <Image
                       style={{ width: 50, height: 50 }}
                       source={{
-                        uri:
-                          'https://plus.google.com/u/0/_/focus/photos/public/AIbEiAIAAABECJvipMufibr86wEiC3ZjYXJkX3Bob3RvKig1ZTQyYTZiZTgxNjRhMmViYTFkOWNjZmMxNGE4ZDgzYjRhMDQ1MDMxMAGgPWot5fVOrzb--8-49VWD7jMKYQ?sz=64',
+                        uri: professionalsMock[item.professionalId - 1].avatar,
                       }}
                     />
                   </AvatarCircle>
+
+                  <Button> Detalhes </Button>
                   <Text>{item.status}</Text>
-                  <Text></Text>
                 </View>
               )}
             />
