@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, SectionList, FlatList, Image } from 'react-native';
-import { AvatarCircle, Container, Content, Input, Text, Icon } from '../../../components';
+import { AvatarCircle, Container, Content, Input, Text, Icon, Button } from '../../../components';
 
 import strings from '../../../config/strings';
 import categoriesMock from '../../../config/mocks/categoriesMock';
@@ -36,6 +36,15 @@ class Home extends React.Component {
                         uri: item.avatar,
                       }}
                     />
+                    <Button
+                      onPress={() =>
+                        this.props.navigation.navigate('ProfessionalProfile', {
+                          professionalId: item.id,
+                        })
+                      }
+                    >
+                      {'Ver mais'}
+                    </Button>
                   </AvatarCircle>
                   <Text style={styles.textOnHigh}> {item.name} </Text>
                   <Text style={styles.textPriceOnHigh}> Media{item.average_reputation} </Text>

@@ -4,6 +4,7 @@ import { Login } from './Login';
 import { ListProfessionalsOfCategory } from './ListProfessionalsOfCategory';
 import { ProfessionalOffline } from './ProfessionalOffline';
 import { ProfessionalProfile } from './ProfessionalProfile';
+import { ServiceDetail } from './ServiceDetail';
 
 export {
   Onboarding,
@@ -12,4 +13,5 @@ export {
   ListProfessionalsOfCategory,
   ProfessionalOffline,
   ProfessionalProfile,
+  ServiceDetail,
 };

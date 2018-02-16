@@ -43,7 +43,15 @@ class Profile extends React.Component {
                     />
                   </AvatarCircle>
 
-                  <Button> Detalhes </Button>
+                  <Button
+                    onPress={() =>
+                      this.props.navigation.navigate('ServiceDetail', {
+                        serviceId: item.id,
+                      })
+                    }
+                  >
+                    {' Detalhes '}
+                  </Button>
                   <Text>{item.status}</Text>
                 </View>
               )}

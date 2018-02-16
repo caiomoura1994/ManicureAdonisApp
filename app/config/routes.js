@@ -7,6 +7,7 @@ import {
   ListProfessionalsOfCategory,
   ProfessionalOffline,
   ProfessionalProfile,
+  ServiceDetail,
 } from '../screens';
 import { Home, Chat, ChatConversation, Calendar, Profile, Search } from '../screens/TabsContainer';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -44,6 +45,14 @@ const tabNavigator = TabNavigator(
         // tabBarIcon: () => <Icon name="person-pin-circle" size={25} color="white" />,
       },
     },
+    Profile: {
+      screen: Profile,
+      navigationOptions: {
+        header: null,
+        title: 'PERFIL',
+        // tabBarIcon: () => <Icon name="person-pin-circle" size={25} color="white" />,
+      },
+    },
     // Chat: {
     //   screen: Chat,
     //   navigationOptions: {
@@ -60,14 +69,6 @@ const tabNavigator = TabNavigator(
     //     // tabBarIcon: () => <Icon name="person-pin-circle" size={25} color="white" />,
     //   },
     // },
-    Profile: {
-      screen: Profile,
-      navigationOptions: {
-        header: null,
-        title: 'PERFIL',
-        // tabBarIcon: () => <Icon name="person-pin-circle" size={25} color="white" />,
-      },
-    },
     // Search: {
     //   screen: Search,
     //   navigationOptions: {
@@ -101,6 +102,12 @@ const stackNavigator = StackNavigator(
     },
     ProfessionalProfile: {
       screen: ProfessionalProfile,
+      navigationOptions: {
+        header: () => null,
+      },
+    },
+    ServiceDetail: {
+      screen: ServiceDetail,
       navigationOptions: {
         header: () => null,
       },
