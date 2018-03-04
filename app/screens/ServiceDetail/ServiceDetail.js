@@ -24,6 +24,12 @@ class ServiceDetail extends React.Component {
         <Text>{serviceParam.date}</Text>
         <Text>{serviceParam.value}</Text>
         <Text>{serviceParam.category}</Text>
+        <Image
+          style={{ width: 50, height: 50 }}
+          source={{
+            uri: professionalParam.avatar,
+          }}
+        />
       </View>
     );
   }
