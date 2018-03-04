@@ -15,8 +15,8 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: 'https://nx9zvp49q7.lp.gql.zone/graphql' }),
-  // link: new HttpLink({ uri: 'http://localhost:8000/graphql' }),
+  // link: new HttpLink({ uri: 'https://nx9zvp49q7.lp.gql.zone/graphql' }),
+  link: new HttpLink({ uri: 'http://localhost:8000/graphql' }),
   cache: new InMemoryCache(),
 });
 
@@ -31,6 +31,18 @@ const Apollo = () => (
 export default Apollo;
 
 // ================================= example apollo request =================================
+
+// const allUsers = gql`
+//   query {
+//     allUsers {
+//       id
+//       name
+//       lastName
+//       gender
+//     }
+//   }
+// `;
+
 // const GET_DOG = gql`
 //   query {
 //     dog(breed: "bulldog") {
@@ -43,14 +55,16 @@ export default Apollo;
 
 // export default (App = () => (
 //   <ApolloProvider client={client}>
-//     <Query query={GET_DOG}>
+//     <Query query={allUsers}>
 //       {({ loading, error, data }) => {
+//         if (error) {
+//           return <Text>Error :(</Text>;
+//         }
 //         if (loading) return <Text>Loading...</Text>;
-//         if (error) return <Text>Error :(</Text>;
-
 //         return (
 //           <Text>
-//             {data.dog.displayImage}-{data.dog.breed}
+//             {data.allUsers[0].id} - {data.allUsers[0].name} {data.allUsers[0].lastName}{' '}
+//             {data.allUsers[0].gender}
 //           </Text>
 //         );
 //       }}

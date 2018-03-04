@@ -7,12 +7,29 @@ import categoriesMock from '../../../config/mocks/categoriesMock';
 import professionalsMock from '../../../config/mocks/professionalsMock';
 import styles from './styles';
 
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
+
 const categories = categoriesMock;
 const bestProfessionals = professionalsMock;
 
 class Home extends React.Component {
   render() {
     return (
+      //     <Query query={allUsers}>
+      //          {({ loading, error, data }) => {
+      //         if (error) {
+      //           return <Text>Error :(</Text>;
+      //         }
+      //         if (loading) return <Text>Loading...</Text>;
+      //         return (
+      //           <Text>
+      //             {data.allUsers[0].id} - {data.allUsers[0].name} {data.allUsers[0].lastName}{' '}
+      //             {data.allUsers[0].gender}
+      //           </Text>
+      //         );
+      //       }}
+      //     </Query>
       <Container>
         <Content>
           <View style={{ flex: 1, justifyContent: 'center' }}>
