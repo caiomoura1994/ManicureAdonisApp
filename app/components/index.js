@@ -1,5 +1,7 @@
 import { Button } from './Button';
 import Icon from './Icon';
+import Category from './Category';
+import SubCategory from './SubCategory';
 import { H1, H2, H3, H4, H5, H6, Text } from './Typography';
 import { SectionRoundedBottom } from './SectionRoundedBottom';
 import AnimatedGradient from './AnimatedGradient';
@@ -11,6 +13,8 @@ import { AvatarCircle } from './AvatarCircle';
 
 export {
   Button,
+  Category,
+  SubCategory,
   Icon,
   H1,
   H2,

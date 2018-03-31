@@ -1,6 +1,15 @@
 import React from 'react';
 import { View, SectionList, FlatList, Image } from 'react-native';
-import { AvatarCircle, Container, Content, Input, Text, Icon, Button } from '../../../components';
+import {
+  AvatarCircle,
+  Container,
+  Content,
+  Input,
+  Text,
+  Icon,
+  Button,
+  Category,
+} from '../../../components';
 
 import strings from '../../../config/strings';
 import categoriesMock from '../../../config/mocks/categoriesMock';
@@ -12,24 +21,19 @@ import { Query } from 'react-apollo';
 
 const categories = categoriesMock;
 const bestProfessionals = professionalsMock;
+const allCategoriesQuery = gql`
+  query {
+    allCategories {
+      name
+      icon
+      id
+    }
+  }
+`;
 
 class Home extends React.Component {
   render() {
     return (
-      //     <Query query={allUsers}>
-      //          {({ loading, error, data }) => {
-      //         if (error) {
-      //           return <Text>Error :(</Text>;
-      //         }
-      //         if (loading) return <Text>Loading...</Text>;
-      //         return (
-      //           <Text>
-      //             {data.allUsers[0].id} - {data.allUsers[0].name} {data.allUsers[0].lastName}{' '}
-      //             {data.allUsers[0].gender}
-      //           </Text>
-      //         );
-      //       }}
-      //     </Query>
       <Container>
         <Content>
           <View style={{ flex: 1, justifyContent: 'center' }}>
@@ -70,35 +74,71 @@ class Home extends React.Component {
             />
 
             {/* Categorias */}
-            <SectionList
-              style={styles.SectionListContent}
-              sections={[
-                {
-                  title: 'Categorias',
-                  data: categories,
-                },
-              ]}
-              renderItem={({ item }) => (
-                <View>
-                  <AvatarCircle>
-                    <Icon
-                      iconType="FontAwesome"
-                      name={item.icon}
-                      size={60}
-                      onPress={() =>
-                        this.props.navigation.navigate('ListProfessionalsOfCategory', {
-                          item,
-                          name: 'Categorias',
-                        })
-                      }
-                    />
-                  </AvatarCircle>
-                  <Text style={styles.textCategory}> {item.name} </Text>
-                  <Text style={styles.textPrice}> A partir de R${item.minimal_price} </Text>
-                </View>
-              )}
-              renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
-            />
+            <Query query={allCategoriesQuery}>
+              {({ loading, error, data }) => {
+                if (error) {
+                  return <Text>Error :(</Text>;
+                }
+                if (loading) return <Text>Loading...</Text>;
+
+                const listCategories = data.allCategories.map((category, index) => (
+                  // <Category key={index.toString()} name={categorie.name} icon={categorie.icon} />
+                  <View>
+                    <AvatarCircle>
+                      <Icon
+                        iconType="FontAwesome"
+                        name={category.icon}
+                        size={60}
+                        onPress={() =>
+                          this.props.navigation.navigate('ListProfessionalsOfCategory', {
+                            category,
+                            name: 'Categorias',
+                          })
+                        }
+                      />
+                    </AvatarCircle>
+                    <Text style={styles.textCategory}> {category.name} </Text>
+                    <Text style={styles.textPrice}> ddd </Text>
+                  </View>
+                ));
+                return listCategories;
+
+                // return (
+
+                //   <SectionList
+                //     style={styles.SectionListContent}
+                //     sections={[
+                //       {
+                //         title: 'Categorias',
+                //         data: data.allCategories,
+                //       },
+                //     ]}
+                //     renderItem={({ category }) => (
+
+                //       <View>
+                //         <AvatarCircle>
+                //           <Icon
+                //             iconType="FontAwesome"
+                //             name={category.icon}
+                //             size={60}
+                //             onPress={() =>
+                //               this.props.navigation.navigate('ListProfessionalsOfCategory', {
+                //                 category,
+                //                 name: 'Categorias',
+                //               })
+                //             }
+                //           />
+                //         </AvatarCircle>
+                //         <Text style={styles.textCategory}> {category.name} </Text>
+                //         <Text style={styles.textPrice}> ddd </Text>
+                //       </View>
+
+                //     )}
+                //     renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
+                //   />
+                // );
+              }}
+            </Query>
           </View>
         </Content>
       </Container>
