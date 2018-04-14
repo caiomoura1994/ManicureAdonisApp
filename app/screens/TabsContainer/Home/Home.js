@@ -57,16 +57,16 @@ class Home extends React.Component {
                         uri: item.avatar,
                       }}
                     />
-                    <Button
-                      onPress={() =>
-                        this.props.navigation.navigate('ProfessionalProfile', {
-                          professionalId: item.id,
-                        })
-                      }
-                    >
-                      {'Ver mais'}
-                    </Button>
                   </AvatarCircle>
+                  <Button
+                    onPress={() =>
+                      this.props.navigation.navigate('ProfessionalProfile', {
+                        professionalId: item.id,
+                      })
+                    }
+                  >
+                    {'Ver mais'}
+                  </Button>
                   <Text style={styles.textOnHigh}> {item.name} </Text>
                   <Text style={styles.textPriceOnHigh}> Media{item.average_reputation} </Text>
                 </View>
@@ -77,28 +77,29 @@ class Home extends React.Component {
             <Query query={allCategoriesQuery}>
               {({ loading, error, data }) => {
                 if (error) {
+                  console.warn(error);
                   return <Text>Error :(</Text>;
                 }
                 if (loading) return <Text>Loading...</Text>;
-
+                console.warn(data);
                 const listCategories = data.allCategories.map((category, index) => (
                   // <Category key={index.toString()} name={categorie.name} icon={categorie.icon} />
                   <View>
                     <AvatarCircle>
-                      <Icon
-                        iconType="FontAwesome"
-                        name={category.icon}
-                        size={60}
-                        onPress={() =>
-                          this.props.navigation.navigate('ListProfessionalsOfCategory', {
-                            category,
-                            name: 'Categorias',
-                          })
-                        }
-                      />
+                      <Icon iconType="FontAwesome" name={category.icon} size={60} />
                     </AvatarCircle>
-                    <Text style={styles.textCategory}> {category.name} </Text>
-                    <Text style={styles.textPrice}> ddd </Text>
+                    <Button
+                      onPress={() =>
+                        this.props.navigation.navigate('ListProfessionalsOfCategory', {
+                          category,
+                          name: 'Categorias',
+                        })
+                      }
+                    >
+                      {category.name}
+                    </Button>
+                    {/* <Text style={styles.textCategory}> {category.name} </Text> */}
+                    {/* <Text style={styles.textPrice}> ddd </Text> */}
                   </View>
                 ));
                 return listCategories;
@@ -121,11 +122,7 @@ class Home extends React.Component {
                 //             iconType="FontAwesome"
                 //             name={category.icon}
                 //             size={60}
-                //             onPress={() =>
-                //               this.props.navigation.navigate('ListProfessionalsOfCategory', {
-                //                 category,
-                //                 name: 'Categorias',
-                //               })
+
                 //             }
                 //           />
                 //         </AvatarCircle>

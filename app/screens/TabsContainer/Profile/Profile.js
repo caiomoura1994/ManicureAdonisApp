@@ -28,13 +28,7 @@ class Profile extends React.Component {
               data={servicesMock}
               renderItem={({ item }) => (
                 <View style={{ flexDirection: 'row' }}>
-                  <AvatarCircle
-                    onPress={() =>
-                      this.props.navigation.navigate('ProfessionalProfile', {
-                        professionalId: item.professionalId,
-                      })
-                    }
-                  >
+                  <AvatarCircle>
                     <Image
                       style={{ width: 50, height: 50 }}
                       source={{
@@ -42,6 +36,16 @@ class Profile extends React.Component {
                       }}
                     />
                   </AvatarCircle>
+
+                  <Button
+                    onPress={() =>
+                      this.props.navigation.navigate('ProfessionalProfile', {
+                        professionalId: item.professionalId,
+                      })
+                    }
+                  >
+                    {' Ver profissional '}
+                  </Button>
 
                   <Button
                     onPress={() =>
