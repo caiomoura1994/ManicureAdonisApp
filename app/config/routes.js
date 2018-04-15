@@ -8,6 +8,7 @@ import {
   ProfessionalOffline,
   ProfessionalProfile,
   ServiceDetail,
+  SubCategoryScreen,
 } from '../screens';
 import { Home, Chat, ChatConversation, Calendar, Profile, Search } from '../screens/TabsContainer';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -96,6 +97,12 @@ const stackNavigator = StackNavigator(
     // },
     Onboarding: {
       screen: Onboarding,
+      navigationOptions: {
+        header: () => null,
+      },
+    },
+    SubCategoryScreen: {
+      screen: SubCategoryScreen,
       navigationOptions: {
         header: () => null,
       },

@@ -38,6 +38,7 @@ class Profile extends React.Component {
                   </AvatarCircle>
 
                   <Button
+                    style={{ margin: '0%' }}
                     onPress={() =>
                       this.props.navigation.navigate('ProfessionalProfile', {
                         professionalId: item.professionalId,

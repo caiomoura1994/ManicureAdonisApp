@@ -26,7 +26,7 @@ const allCategoriesQuery = gql`
     allCategories {
       name
       icon
-      id
+      key: id
     }
   }
 `;
@@ -38,7 +38,7 @@ class Home extends React.Component {
         <Content>
           <View style={{ flex: 1, justifyContent: 'center' }}>
             {/* recomendado */}
-            <Text style={styles.textOnHigh}> Em alta no Adonis</Text>
+            {/* <Text style={styles.textOnHigh}> Em alta no Adonis</Text>
             <SectionList
               style={styles.SectionListOnHigh}
               horizontal
@@ -71,17 +71,17 @@ class Home extends React.Component {
                   <Text style={styles.textPriceOnHigh}> Media{item.average_reputation} </Text>
                 </View>
               )}
-            />
+            /> */}
 
             {/* Categorias */}
             <Query query={allCategoriesQuery}>
               {({ loading, error, data }) => {
+                // console.warn(data);
+                // console.warn(error);
                 if (error) {
-                  console.warn(error);
                   return <Text>Error :(</Text>;
                 }
                 if (loading) return <Text>Loading...</Text>;
-                console.warn(data);
                 const listCategories = data.allCategories.map((category, index) => (
                   // <Category key={index.toString()} name={categorie.name} icon={categorie.icon} />
                   <View>
@@ -90,7 +90,8 @@ class Home extends React.Component {
                     </AvatarCircle>
                     <Button
                       onPress={() =>
-                        this.props.navigation.navigate('ListProfessionalsOfCategory', {
+                        this.props.navigation.navigate('SubCategoryScreen', {
+                          // this.props.navigation.navigate('ListProfessionalsOfCategory', {
                           category,
                           name: 'Categorias',
                         })
@@ -98,42 +99,9 @@ class Home extends React.Component {
                     >
                       {category.name}
                     </Button>
-                    {/* <Text style={styles.textCategory}> {category.name} </Text> */}
-                    {/* <Text style={styles.textPrice}> ddd </Text> */}
                   </View>
                 ));
                 return listCategories;
-
-                // return (
-
-                //   <SectionList
-                //     style={styles.SectionListContent}
-                //     sections={[
-                //       {
-                //         title: 'Categorias',
-                //         data: data.allCategories,
-                //       },
-                //     ]}
-                //     renderItem={({ category }) => (
-
-                //       <View>
-                //         <AvatarCircle>
-                //           <Icon
-                //             iconType="FontAwesome"
-                //             name={category.icon}
-                //             size={60}
-
-                //             }
-                //           />
-                //         </AvatarCircle>
-                //         <Text style={styles.textCategory}> {category.name} </Text>
-                //         <Text style={styles.textPrice}> ddd </Text>
-                //       </View>
-
-                //     )}
-                //     renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
-                //   />
-                // );
               }}
             </Query>
           </View>

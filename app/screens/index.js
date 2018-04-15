@@ -5,6 +5,7 @@ import { ListProfessionalsOfCategory } from './ListProfessionalsOfCategory';
 import { ProfessionalOffline } from './ProfessionalOffline';
 import { ProfessionalProfile } from './ProfessionalProfile';
 import { ServiceDetail } from './ServiceDetail';
+import { SubCategoryScreen } from './SubCategoryScreen';
 
 export {
   Onboarding,
@@ -14,4 +15,5 @@ export {
   ProfessionalOffline,
   ProfessionalProfile,
   ServiceDetail,
+  SubCategoryScreen,
 };
