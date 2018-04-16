@@ -15,6 +15,7 @@ class ServiceDetail extends React.Component {
         <Text>Descrição {this.props.service.description}</Text>
         <Text>Preço {this.props.service.price}</Text>
         <Text>pubDate {this.props.service.pubDate}</Text>
+        <Text>professionalOwner {this.props.service.professionalOwner.online}</Text>
       </View>
     );
   }
