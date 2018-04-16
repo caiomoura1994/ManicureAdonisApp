@@ -8,18 +8,26 @@ import styles from './styles';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
+class ServiceDetail extends React.Component {
+  render() {
+    return (
+      <View>
+        <Text>Descrição {this.props.service.description}</Text>
+        <Text>Preço {this.props.service.price}</Text>
+        <Text>pubDate {this.props.service.pubDate}</Text>
+      </View>
+    );
+  }
+}
+
 class ListProfessionalsOfCategory extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
-    // const services = this.props.navigation.state.params.item.services;
-    // console.warn(this.props.navigation.state.params.category);
-    console.warn(this.props.navigation.state.params.subCategory);
-
     const subCategory = this.props.navigation.state.params.subCategory;
 
-    const allSubCategoriesQuery = gql`
+    const serviceQuery = gql`
       {
         searchService(subCategory: ${subCategory.key}) {
           description
@@ -27,6 +35,7 @@ class ListProfessionalsOfCategory extends React.Component {
           price 
           professionalOwner {
             key:id
+            id
             online
             gender
             biography
@@ -40,82 +49,17 @@ class ListProfessionalsOfCategory extends React.Component {
       }
     `;
     return (
-      <Container>
-        <Text> Estes profissionais de estão online Agora!</Text>
-        {/* <Content>
-          <View style={{ flex: 1, justifyContent: 'center' }}>
-            <FlatList
-              data={services}
-              renderItem={({ item }) => (
-                <View>
-                  <Image
-                    style={{ width: 50, height: 50 }}
-                    source={{
-                      uri: item.uri,
-                    }}
-                  />
-                  <Image
-                    style={{ width: 50, height: 50 }}
-                    source={{
-                      uri: item.professional.avatar,
-                    }}
-                  />
-                  <Text>Nome: {item.professional.name}</Text>
-                  <Text>Média: {item.professional.average_reputation}</Text>
-                  <Text>Preço: {item.price}</Text>
-                  <Button
-                    title="Learn More"
-                    color="#841584"
-                    onPress={() =>
-                      Alert.alert(
-                        'Contrate já, ',
-                        `Aguarde a resposta de ${item.professional.name} por apenas R$${
-                          item.price
-                        }`,
-                        [
-                          {
-                            text: 'Cancelar',
-                            onPress: () => console.log('Cancel Pressed'),
-                            style: 'cancel',
-                          },
-                          {
-                            text: 'Contratar',
-                            onPress: () =>
-                              setTimeout(() => {
-                                Alert.alert(
-                                  'Estou lhe esperando!',
-                                  `${item.professional.name} está a caminho!`,
-                                  [
-                                    {
-                                      text: 'Cancelar',
-                                      onPress: () => console.log('Cancel Pressed'),
-                                      style: 'cancel',
-                                    },
-                                    {
-                                      text: 'Ir para o perfil dele(a)',
-                                      onPress: () =>
-                                        this.props.navigation.navigate('ProfessionalProfile', {
-                                          professionalId: item.professional.id,
-                                        }),
-                                    },
-                                  ],
-                                  { cancelable: false },
-                                );
-                              }, 5000),
-                          },
-                        ],
-                        { cancelable: false },
-                      )
-                    }
-                  >
-                    Contratar agora!
-                  </Button>
-                </View>
-              )}
-            />
-          </View>
-        </Content> */}
-      </Container>
+      <Query query={serviceQuery}>
+        {({ loading, error, data }) => {
+          console.warn(data);
+          console.warn(error);
+          if (error) {
+            return <Text>Error :(</Text>;
+          }
+          if (loading) return <Text>Loading...</Text>;
+          return <ServiceDetail service={data.searchService[0]} />;
+        }}
+      </Query>
     );
   }
 }
