@@ -10,6 +10,7 @@ import { Container } from './Container';
 import { Content } from './Content';
 import { Input } from './Input';
 import { AvatarCircle } from './AvatarCircle';
+import { CardServiceProvider } from './CardServiceProvider';
 
 export {
   Button,
@@ -30,4 +31,5 @@ export {
   Content,
   AvatarCircle,
   Input,
+  CardServiceProvider,
 };

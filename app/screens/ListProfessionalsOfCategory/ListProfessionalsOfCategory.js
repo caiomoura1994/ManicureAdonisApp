@@ -1,7 +1,14 @@
 import React from 'react';
 import { View, FlatList, Image, Alert } from 'react-native';
-import { Container, Content, Input, Text, AvatarCircle, Button } from '../../components';
-
+import {
+  Container,
+  Content,
+  Input,
+  Text,
+  AvatarCircle,
+  CardServiceProvider,
+} from '../../components';
+import { Header, Left, Icon, Right, Body, Button, Title } from 'native-base';
 import strings from '../../config/strings';
 import styles from './styles';
 
@@ -10,14 +17,7 @@ import { Query } from 'react-apollo';
 
 class ServiceDetail extends React.Component {
   render() {
-    return (
-      <View>
-        <Text>Descrição {this.props.service.description}</Text>
-        <Text>Preço {this.props.service.price}</Text>
-        <Text>pubDate {this.props.service.pubDate}</Text>
-        <Text>professionalOwner {this.props.service.professionalOwner.online}</Text>
-      </View>
-    );
+    return <CardServiceProvider servicePropsParams={this.props.subCategory} />;
   }
 }
 
@@ -27,10 +27,10 @@ class ListProfessionalsOfCategory extends React.Component {
   }
   render() {
     const subCategory = this.props.navigation.state.params.subCategory;
-
     const serviceQuery = gql`
       {
         searchService(subCategory: ${subCategory.key}) {
+          key:id
           description
           pubDate
           price 
@@ -50,17 +50,42 @@ class ListProfessionalsOfCategory extends React.Component {
       }
     `;
     return (
-      <Query query={serviceQuery}>
-        {({ loading, error, data }) => {
-          console.warn(data);
-          console.warn(error);
-          if (error) {
-            return <Text>Error :(</Text>;
-          }
-          if (loading) return <Text>Loading...</Text>;
-          return <ServiceDetail service={data.searchService[0]} />;
-        }}
-      </Query>
+      <Container>
+        <Header>
+          <Left>
+            <Button
+              transparent
+              onPress={() => {
+                this.props.navigation.pop();
+              }}
+            >
+              <Icon name="arrow-back" />
+            </Button>
+          </Left>
+          <Body style={{ flex: 3 }}>
+            <Title>Custom Header</Title>
+          </Body>
+          <Right />
+        </Header>
+        <Content>
+          <Query query={serviceQuery}>
+            {({
+ loading, error, data, refetch, networkStatus,
+}) => {
+              if (networkStatus === 4) return 'Atualizando!';
+              if (error) {
+                return <Text>Error :(</Text>;
+              }
+              if (loading) return <Text>Loading...</Text>;
+
+              const listServices = data.searchService.map((serviceItem, index) => (
+                <CardServiceProvider servicePropsParams={serviceItem} />
+              ));
+              return listServices;
+            }}
+          </Query>
+        </Content>
+      </Container>
     );
   }
 }

@@ -22,14 +22,14 @@ class SubCategoryScreen extends React.Component {
       }
     `;
 
-    console.warn(category);
-    console.warn(category.key);
-    console.warn(allSubCategoriesQuery);
+    // console.warn(category);
+    // console.warn(category.key);
+    // console.warn(allSubCategoriesQuery);
     return (
       <Query query={allSubCategoriesQuery}>
         {({ loading, error, data }) => {
-          console.warn(data);
-          console.warn(error);
+          // console.warn(data);
+          // console.warn(error);
           if (error) {
             return <Text>Error :(</Text>;
           }
@@ -47,7 +47,7 @@ class SubCategoryScreen extends React.Component {
               </AvatarCircle>
               <Button
                 onPress={() =>
-                  this.props.navigation.navigate('ListProfessionalsOfCategory', {
+                  this.props.navigation.push('ListProfessionalsOfCategory', {
                     subCategory,
                     name: 'Categorias',
                   })
