@@ -1,25 +1,9 @@
 import React from 'react';
-import { View, FlatList, Image, Alert } from 'react-native';
-import {
-  Container,
-  Content,
-  Input,
-  Text,
-  AvatarCircle,
-  CardServiceProvider,
-} from '../../components';
+import { Container, Content, Text, CardServiceProvider } from '../../components';
 import { Header, Left, Icon, Right, Body, Button, Title } from 'native-base';
-import strings from '../../config/strings';
-import styles from './styles';
 
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-
-class ServiceDetail extends React.Component {
-  render() {
-    return <CardServiceProvider servicePropsParams={this.props.subCategory} />;
-  }
-}
 
 class ListProfessionalsOfCategory extends React.Component {
   constructor(props) {
@@ -31,12 +15,13 @@ class ListProfessionalsOfCategory extends React.Component {
       {
         searchService(subCategory: ${subCategory.key}) {
           key:id
+          serviceId:id
           description
           pubDate
           price 
           professionalOwner {
             key:id
-            id
+            professionalId:id
             online
             gender
             biography
@@ -79,7 +64,7 @@ class ListProfessionalsOfCategory extends React.Component {
               if (loading) return <Text>Loading...</Text>;
 
               const listServices = data.searchService.map((serviceItem, index) => (
-                <CardServiceProvider servicePropsParams={serviceItem} />
+                <CardServiceProvider key={index} servicePropsParams={serviceItem} />
               ));
               return listServices;
             }}

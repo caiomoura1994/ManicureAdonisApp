@@ -51,9 +51,7 @@ class SectionRoundedBottom extends React.Component {
     return (
       <View style={[styles.container, style]}>
         {this.renderRoundedBottom()}
-        <View style={styles.innercontainer}>
-          {children}
-        </View>
+        <View style={styles.innercontainer}>{children}</View>
       </View>
     );
   }

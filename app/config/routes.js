@@ -11,8 +11,9 @@ import {
   SubCategoryScreen,
 } from '../screens';
 import { Home, Chat, ChatConversation, Calendar, Profile, Search } from '../screens/TabsContainer';
-import Icon from 'react-native-vector-icons/Ionicons';
+// import Icon from 'react-native-vector-icons/Ionicons';
 // import { Icon } from '../components';
+import { Icon } from 'native-base';
 
 const tabNavigatorProfessionals = TabNavigator(
   {
@@ -44,18 +45,20 @@ const tabNavigator = TabNavigator(
       screen: Home,
       navigationOptions: {
         // gesturesEnabled: false,
-        header: null,
+        // header: null,
+
         title: 'HOME',
-        // tabBarIcon: () => <Icon name="person-pin-circle" size={25} color="white" />,
+        tabBarIcon: () => <Icon name="home" size={25} color="black" />,
       },
     },
     Profile: {
       screen: Profile,
       navigationOptions: {
         // gesturesEnabled: false,
-        header: null,
+        // header: null,
+
         title: 'PERFIL',
-        // tabBarIcon: () => <Icon name="person-pin-circle" size={25} color="white" />,
+        tabBarIcon: () => <Icon name="person" size={25} color="black" />,
       },
     },
     // Chat: {
@@ -64,7 +67,7 @@ const tabNavigator = TabNavigator(
     // gesturesEnabled: false,
     //     header: null,
     //     title: 'CHAT',
-    //     // tabBarIcon: () => <Icon name="person-pin-circle" size={25} color="white" />,
+    //     // tabBarIcon: () => <Icon name="home" size={25} color="black" />,
     //   },
     // },
     // Calendar: {
@@ -73,7 +76,7 @@ const tabNavigator = TabNavigator(
     // gesturesEnabled: false,
     //     header: null,
     //     title: 'CALENDARIO',
-    //     // tabBarIcon: () => <Icon name="person-pin-circle" size={25} color="white" />,
+    //     // tabBarIcon: () => <Icon name="home" size={25} color="black" />,
     //   },
     // },
     // Search: {
@@ -91,6 +94,7 @@ const tabNavigator = TabNavigator(
   },
   {
     tabBarPosition: 'bottom',
+    showIcon: true,
   },
 );
 
