@@ -2,9 +2,24 @@ import React from 'react';
 import { View } from 'react-native';
 import { Container, Content, Input } from '../../components';
 
-import strings from '../../config/strings';
-import styles from './styles';
-
+// mutation{
+//   createAccount(newAccount:{
+//     gender:"F",
+//     profileType:"1",
+//     biography:"Biografia",
+//     state:"BA",
+//     city:"Salvador",
+//     name:"Caio",
+//     lastName:"Moura",
+//     phone:"71988362338",
+//     email:"caiomoura1994@gmail.com",
+//     password:"C410140311"
+//   }) {
+//     count
+//     pk:count
+//     newAccount
+//   }
+// }
 class SignUp extends React.Component {
   render() {
     return (
@@ -19,5 +34,4 @@ class SignUp extends React.Component {
     );
   }
 }
-
 export default SignUp;

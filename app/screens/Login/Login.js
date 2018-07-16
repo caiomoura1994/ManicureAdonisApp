@@ -1,68 +1,117 @@
 import React from 'react';
-import { View, TextInput } from 'react-native';
+import { View } from 'react-native';
 
 import strings from '../../config/strings';
 import styles from './styles';
-import {
-  Container,
-  Content,
-  SectionRoundedBottom,
-  Logo,
-  H1,
-  H4,
-  Button,
-  Input,
-  AvatarCircle,
-  Icon,
-} from '../../components';
-import { colors } from '../../config/theme';
+import { Content, Button, Input, AvatarCircle, Icon } from '../../components';
+import gql from 'graphql-tag';
+import { Mutation } from 'react-apollo';
+
+const LOGIN_MUTATION = gql`
+  mutation addTodo($email: String!, $password: String!) {
+    login(loginInput: { username: $email, password: $password }) {
+      id
+      biography
+      profileType
+      name
+      lastName
+    }
+  }
+`;
 
 class Login extends React.Component {
+  passwordInput: null;
+  constructor(props) {
+    super(props);
+    this.state = { email: '', password: '' };
+  }
+  goToHomePage(response) {
+    console.log(response);
+    if (response) {
+      const myReturn = response.data;
+      if (myReturn.login) {
+        if (myReturn.login.id) {
+          this.props.navigation.navigate('TabsContainer');
+        }
+      }
+    }
+  }
+  focusPassword = () => {
+    console.log(this.passwordInput);
+    if (this.passwordInput) {
+      this.passwordInput.focus;
+    }
+  };
   render() {
     return (
-      <Container>
-        {/* HEADER */}
-        {/* <SectionRoundedBottom
-          animated
-          colorsGradient={colors.$GRADIENT_ANIMATED_COLOR}
-          speed={2000}
-          style={styles.header}
-        >
-          <Logo animation="fadeIn" />
-        </SectionRoundedBottom> */}
-        {/* CONTENT */}
-        <Content style={styles.content}>
-          {/* SECTION WELCOME */}
-          <View style={styles.sectionWelcome}>
-            <View style={{ alignItems: 'center' }}>
-              <AvatarCircle>
-                <Icon iconType="FontAwesome" name="user" size={60} />
-              </AvatarCircle>
+      <Content style={styles.content}>
+        {/* SECTION WELCOME */}
+        <Mutation mutation={LOGIN_MUTATION}>
+          {(addTodo, response) => (
+            <View>
+              <View style={{ alignItems: 'center' }}>
+                <AvatarCircle>
+                  <Icon iconType="FontAwesome" name="user" size={60} />
+                </AvatarCircle>
+              </View>
+              {/* {response.error ? (
+                <View>
+                  <Text> Algo deu errado</Text>
+                </View>
+              ) : (
+                <View />
+              )} */}
+              <View>
+                <Input
+                  onChangeText={(dataResponse) => {
+                    this.setState({ email: dataResponse });
+                  }}
+                  blurOnSubmit={false}
+                  placeholder="E-mail"
+                  returnKeyType="next"
+                  keyboardType="email-address"
+                  onSubmitEditing={() => {
+                    this.focusPassword();
+                  }}
+                />
+                <Input
+                  onChangeText={(dataResponse) => {
+                    this.setState({ password: dataResponse });
+                  }}
+                  secureTextEntry
+                  ref={(input) => {
+                    if (input != null) {
+                      this.passwordInput = input;
+                    }
+                  }}
+                  returnKeyType="done"
+                  placeholder="Senha"
+                />
+                <Button
+                  kind="rounded"
+                  animation="fadeInRight"
+                  onPress={() => {
+                    addTodo({
+                      variables: { email: this.state.email, password: this.state.password },
+                    });
+                  }}
+                >
+                  {strings.enterInApp}
+                </Button>
+                <Button
+                  animation="fadeInLeft"
+                  style={styles.buttonEntrar}
+                  textStyle={styles.buttonTextEntrar}
+                  type="naked"
+                  shadow={false}
+                >
+                  {strings.forgotPassword}
+                </Button>
+              </View>
             </View>
-            <Input placeholder="E-mail" />
-            <Input placeholder="Senha" />
-          </View>
-          {/* SECTION BUTTONS */}
-          <View style={styles.sectionButton}>
-            <Button
-              kind="rounded"
-              animation="fadeInRight"
-              onPress={() => this.props.navigation.navigate('TabsContainer')}
-            >
-              {strings.enterInApp}
-            </Button>
-            <Button
-              animation="fadeInLeft"
-              style={styles.buttonEntrar}
-              textStyle={styles.buttonTextEntrar}
-              type="naked"
-              shadow={false}
-            >
-              {strings.forgotPassword}
-            </Button>
-          </View>
-        </Content>
-      </Container>
+          )}
+        </Mutation>
+      </Content>
     );
   }
 }

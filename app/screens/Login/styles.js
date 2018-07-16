@@ -7,9 +7,9 @@ export default EStyleSheet.create({
   },
   // CONTENT
   content: {
-    flex: 2,
+    flex: 1,
     marginHorizontal: 24,
-    paddingTop: 100,
+    justifyContent: 'center',
   },
   // SECTION WELCOME
   sectionWelcome: {
