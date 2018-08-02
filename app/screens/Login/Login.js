@@ -28,11 +28,8 @@ class Login extends React.Component {
   goToHomePage(response) {
     console.log(response);
     if (response) {
-      const myReturn = response.data;
-      if (myReturn.login) {
-        if (myReturn.login.id) {
-          this.props.navigation.navigate('TabsContainer', { userData: myReturn });
-        }
+      if (response.login) {
+        this.props.navigation.navigate('TabsContainer', { userData: response });
       }
     }
   }
