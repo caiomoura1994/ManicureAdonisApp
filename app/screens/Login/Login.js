@@ -31,7 +31,7 @@ class Login extends React.Component {
       const myReturn = response.data;
       if (myReturn.login) {
         if (myReturn.login.id) {
-          this.props.navigation.navigate('TabsContainer');
+          this.props.navigation.navigate('TabsContainer', { userData: myReturn });
         }
       }
     }
@@ -46,8 +46,13 @@ class Login extends React.Component {
     return (
       <Content style={styles.content}>
         {/* SECTION WELCOME */}
-        <Mutation mutation={LOGIN_MUTATION}>
-          {(addTodo, response) => (
+        <Mutation
+          mutation={LOGIN_MUTATION}
+          update={(cache, { data }) => {
+            this.goToHomePage(data);
+          }}
+        >
+          {addTodo => (
             <View>
               <View style={{ alignItems: 'center' }}>
                 <AvatarCircle>
@@ -92,6 +97,7 @@ class Login extends React.Component {
                   animation="fadeInRight"
                   onPress={() => {
                     addTodo({
+                      // variables: { email: 'caiomoura1994@gmail.com', password: 'C410140311' },
                       variables: { email: this.state.email, password: this.state.password },
                     });
                   }}
