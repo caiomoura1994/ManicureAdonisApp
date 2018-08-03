@@ -25,22 +25,22 @@ class Login extends React.Component {
     super(props);
     this.state = { email: '', password: '' };
   }
+  handlerError = () => {
+    Alert.alert(
+      'Login ou senha incorretos',
+      'Os dados preenchidos estão incorretos. Tente novamente',
+    );
+  };
   goToHomePage(response) {
     console.log(response);
     if (response) {
       if (response.login) {
         this.props.navigation.navigate('TabsContainer', { userData: response });
       } else {
-        Alert.alert(
-          'Login ou senha incorretos',
-          'Os dados preenchidos estão incorretos. Tente novamente',
-        );
+        this.handlerError();
       }
     } else {
-      Alert.alert(
-        'Login ou senha incorretos',
-        'Os dados preenchidos estão incorretos. Tente novamente',
-      );
+      this.handlerError();
     }
   }
   focusPassword = () => {
@@ -68,6 +68,7 @@ class Login extends React.Component {
               </View>
               <View>
                 <Input
+                  textContentType="emailAddress"
                   onChangeText={(dataResponse) => {
                     this.setState({ email: dataResponse });
                   }}
@@ -80,6 +81,7 @@ class Login extends React.Component {
                   }}
                 />
                 <Input
+                  textContentType="password"
                   onChangeText={(dataResponse) => {
                     this.setState({ password: dataResponse });
                   }}
