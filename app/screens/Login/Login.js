@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 
 import strings from '../../config/strings';
 import styles from './styles';
@@ -30,7 +30,17 @@ class Login extends React.Component {
     if (response) {
       if (response.login) {
         this.props.navigation.navigate('TabsContainer', { userData: response });
+      } else {
+        Alert.alert(
+          'Login ou senha incorretos',
+          'Os dados preenchidos estão incorretos. Tente novamente',
+        );
       }
+    } else {
+      Alert.alert(
+        'Login ou senha incorretos',
+        'Os dados preenchidos estão incorretos. Tente novamente',
+      );
     }
   }
   focusPassword = () => {
@@ -56,13 +66,6 @@ class Login extends React.Component {
                   <Icon iconType="FontAwesome" name="user" size={60} />
                 </AvatarCircle>
               </View>
-              {/* {response.error ? (
-                <View>
-                  <Text> Algo deu errado</Text>
-                </View>
-              ) : (
-                <View />
-              )} */}
               <View>
                 <Input
                   onChangeText={(dataResponse) => {
