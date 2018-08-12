@@ -8,41 +8,56 @@ export default class CardServiceProvider extends React.Component {
     console.log(this.props);
   }
   render() {
-    const ADD_MUTATION = gql`mutation {
-      createServiceRegiter(newService:{
-      addressAttendance:"AdRESS",
-        client:1,
-        payment:"1", # PAYMENT_CHOICES = ('1','Cartão'), ('2','Dinheiro'), ('3','PayPal'), ('4','PagSeguro')
-        payed:false,
-        status:"1", #('1','Aguardando confirmação'),('2','Em andamento'),('3','Finalizado')
-        service:${this.props.serviceId},
-        userId:1
-    }) {
-        count
-        newService {
-          date
-          addressAttendance
-          payment
-          payed
-          status
-          pk
+    const { servicePropsParams } = this.props;
+    const {
+      professionalOwner, price, description, serviceId,
+    } = servicePropsParams;
+    const ADD_MUTATION = gql`
+      mutation addTodo($client: Int!, $userId: Int!, $serviceId: Int!) {
+        createServiceRegiter(
+          newServiceOrder: {
+            addressAttendance: "AdRESS"
+            client: $client
+            payment: "1" # PAYMENT_CHOICES = ('1','Cartão'), ('2','Dinheiro'), ('3','PayPal'), ('4','PagSeguro')
+            payed: false
+            status: "1" #('1','Aguardando confirmação'),('2','Em andamento'),('3','Finalizado')
+            service: $serviceId
+            userId: $userId
+          }
+        ) {
+          count
+          newServiceOrder {
+            date
+            addressAttendance
+            payment
+            payed
+            status
+          }
         }
       }
-    }
     `;
+
     return (
       //   <Container>
       //     <Content>
-      <Mutation mutation={ADD_MUTATION}>
+      <Mutation
+        mutation={ADD_MUTATION}
+        update={(cache, { data }) => {
+          console.log('data:', data);
+          if (data.createServiceRegiter) {
+            const { count, newServiceOrder } = data.createServiceRegiter;
+          }
+        }}
+      >
         {addTodo => (
           <Card style={{ flex: 0 }}>
             <CardItem>
               {/* this.props.showMe ? <button type="submit" className="btn nav-btn-red">SIGN UP</button> : null */}
               <Left>
-                {this.props.servicePropsParams.professionalOwner.avatar ? (
+                {professionalOwner.avatar ? (
                   <Thumbnail
                     source={{
-                      uri: this.props.servicePropsParams.professionalOwner.avatar,
+                      uri: professionalOwner.avatar,
                     }}
                   />
                 ) : (
@@ -56,18 +71,18 @@ export default class CardServiceProvider extends React.Component {
 
                 <Body>
                   <Text>
-                    {this.props.servicePropsParams.professionalOwner.name}{' '}
-                    {this.props.servicePropsParams.professionalOwner.lastName}{' '}
+                    {`${professionalOwner.name}`}
+                    {`${professionalOwner.lastName}`}
                   </Text>
-                  <Text note>Por apenas R${this.props.servicePropsParams.price}</Text>
-                  {/* {this.props.servicePropsParams.professionalOwner.gender} */}
+                  <Text note>{`Por apenas R$ ${price},00`}</Text>
+                  {/* {professionalOwner.gender} */}
                 </Body>
               </Left>
             </CardItem>
             <CardItem>
               <Body>
                 {/* <Image source={{ uri: 'Image URL' }} style={{ height: 200, width: 200, flex: 1 }} /> */}
-                <Text>{this.props.servicePropsParams.description}</Text>
+                <Text>{description}</Text>
               </Body>
             </CardItem>
             <CardItem>
@@ -75,7 +90,13 @@ export default class CardServiceProvider extends React.Component {
                 <Button
                   transparent
                   onPress={() => {
-                    this.toHire();
+                    addTodo({
+                      variables: {
+                        userId: professionalOwner.professionalId,
+                        client: 1,
+                        serviceId,
+                      },
+                    });
                   }}
                   textStyle={{ color: '#87838B' }}
                 >

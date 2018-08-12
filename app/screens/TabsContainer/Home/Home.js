@@ -76,8 +76,6 @@ class Home extends React.Component {
             {/* Categorias */}
             <Query query={allCategoriesQuery}>
               {({ loading, error, data }) => {
-                // console.warn(data);
-                // console.warn(error);
                 if (error) {
                   return <Text>Error :(</Text>;
                 }

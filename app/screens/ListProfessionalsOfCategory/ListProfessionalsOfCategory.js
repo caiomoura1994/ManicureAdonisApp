@@ -1,9 +1,10 @@
 import React from 'react';
-import { Container, Content, Text, CardServiceProvider } from '../../components';
 import { Header, Left, Icon, Right, Body, Button, Title } from 'native-base';
-
+import { ScrollView } from 'react-native';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
+
+import { Container, Content, Text, CardServiceProvider } from '../../components';
 
 class ListProfessionalsOfCategory extends React.Component {
   constructor(props) {
@@ -66,7 +67,8 @@ class ListProfessionalsOfCategory extends React.Component {
               const listServices = data.searchService.map((serviceItem, index) => (
                 <CardServiceProvider key={index} servicePropsParams={serviceItem} />
               ));
-              return listServices;
+              console.log(data);
+              return <ScrollView>{listServices}</ScrollView>;
             }}
           </Query>
         </Content>
