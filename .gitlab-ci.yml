@@ -2,9 +2,7 @@ image: node:8.12.0
 
 stages:
   - install
-  - build
   - test
-  - deploy
 
 installing:
   - install
