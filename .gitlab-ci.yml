@@ -5,7 +5,6 @@ stages:
   - test
 
 installing:
-  - install
   - npm install
 
 tests:
