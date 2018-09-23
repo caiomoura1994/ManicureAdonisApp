@@ -1,6 +1,16 @@
 image: node:8.12.0
-before_script:
+
+stages:
+  - install
+  - build
+  - test
+  - deploy
+
+installing:
+  - install
   - npm install
+
 tests:
+  stage: test
   script:
     - npm test
