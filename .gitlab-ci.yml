@@ -1,0 +1,14 @@
+image: node:8.12.0
+
+stages:
+  - install
+  - test
+
+installing:
+  stage: install
+  script: npm install
+
+tests:
+  stage: test
+  script:
+    - npm test
