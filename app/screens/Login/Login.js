@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, Alert } from 'react-native';
+import { View, Alert } from 'react-native';
+import gql from 'graphql-tag';
+import { Mutation } from 'react-apollo';
+import PropTypes from 'prop-types';
 
 import strings from '../../config/strings';
 import styles from './styles';
 import { Content, Button, Input, AvatarCircle, Icon } from '../../components';
-import gql from 'graphql-tag';
-import { Mutation } from 'react-apollo';
 
 const LOGIN_MUTATION = gql`
   mutation addTodo($email: String!, $password: String!) {
@@ -20,7 +21,6 @@ const LOGIN_MUTATION = gql`
 `;
 
 class Login extends React.Component {
-  passwordInput: null;
   constructor(props) {
     super(props);
     this.state = { email: '', password: '' };
@@ -33,9 +33,10 @@ class Login extends React.Component {
   };
   goToHomePage(response) {
     console.log(response);
+    const { navigation } = this.props;
     if (response) {
       if (response.login) {
-        this.props.navigation.navigate('TabsContainer', { userData: response });
+        navigation.navigate('TabsContainer', { userData: response });
       } else {
         this.handlerError();
       }
@@ -43,13 +44,9 @@ class Login extends React.Component {
       this.handlerError();
     }
   }
-  focusPassword = () => {
-    console.log(this.passwordInput);
-    if (this.passwordInput) {
-      this.passwordInput.focus;
-    }
-  };
+
   render() {
+    const { email, password } = this.state;
     return (
       <Content style={styles.content}>
         {/* SECTION WELCOME */}
@@ -86,11 +83,6 @@ class Login extends React.Component {
                     this.setState({ password: dataResponse });
                   }}
                   secureTextEntry
-                  ref={(input) => {
-                    if (input != null) {
-                      this.passwordInput = input;
-                    }
-                  }}
                   returnKeyType="done"
                   placeholder="Senha"
                 />
@@ -100,7 +92,7 @@ class Login extends React.Component {
                   onPress={() => {
                     addTodo({
                       // variables: { email: 'caiomoura1994@gmail.com', password: 'C410140311' },
-                      variables: { email: this.state.email, password: this.state.password },
+                      variables: { email, password },
                     });
                   }}
                 >
@@ -123,5 +115,9 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  navigation: PropTypes.any,
+};
 
 export default Login;
