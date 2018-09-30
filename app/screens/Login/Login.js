@@ -3,6 +3,7 @@ import { View, Alert } from 'react-native';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import PropTypes from 'prop-types';
+import FBLoginButton from '../../components/FacebokButton/FBLoginButton';
 
 import strings from '../../config/strings';
 import styles from './styles';
@@ -21,103 +22,104 @@ const LOGIN_MUTATION = gql`
 `;
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { email: '', password: '' };
-  }
-  handlerError = () => {
-    Alert.alert(
-      'Login ou senha incorretos',
-      'Os dados preenchidos estão incorretos. Tente novamente',
-    );
-  };
-  goToHomePage(response) {
-    console.log(response);
-    const { navigation } = this.props;
-    if (response) {
-      if (response.login) {
-        navigation.navigate('TabsContainer', { userData: response });
-      } else {
-        this.handlerError();
-      }
-    } else {
-      this.handlerError();
+    constructor(props) {
+        super(props);
+        this.state = { email: '', password: '' };
     }
-  }
+    handlerError = () => {
+        Alert.alert(
+            'Login ou senha incorretos',
+            'Os dados preenchidos estão incorretos. Tente novamente',
+        );
+    };
+    goToHomePage(response) {
+        console.log(response);
+        const { navigation } = this.props;
+        if (response) {
+            if (response.login) {
+                navigation.navigate('TabsContainer', { userData: response });
+            } else {
+                this.handlerError();
+            }
+        } else {
+            this.handlerError();
+        }
+    }
 
-  render() {
-    const { email, password } = this.state;
-    return (
-      <Content style={styles.content}>
-        {/* SECTION WELCOME */}
-        <Mutation
-          mutation={LOGIN_MUTATION}
-          update={(cache, { data }) => {
-            this.goToHomePage(data);
-          }}
-        >
-          {addTodo => (
-            <View>
-              <View style={{ alignItems: 'center' }}>
-                <AvatarCircle>
-                  <Icon iconType="FontAwesome" name="user" size={60} />
-                </AvatarCircle>
-              </View>
-              <View>
-                <Input
-                  textContentType="emailAddress"
-                  onChangeText={(dataResponse) => {
-                    this.setState({ email: dataResponse });
-                  }}
-                  blurOnSubmit={false}
-                  placeholder="E-mail"
-                  returnKeyType="next"
-                  keyboardType="email-address"
-                  onSubmitEditing={() => {
-                    this.focusPassword();
-                  }}
-                />
-                <Input
-                  textContentType="password"
-                  onChangeText={(dataResponse) => {
-                    this.setState({ password: dataResponse });
-                  }}
-                  secureTextEntry
-                  returnKeyType="done"
-                  placeholder="Senha"
-                />
-                <Button
-                  kind="rounded"
-                  animation="fadeInRight"
-                  onPress={() => {
-                    addTodo({
-                      // variables: { email: 'caiomoura1994@gmail.com', password: 'C410140311' },
-                      variables: { email, password },
-                    });
-                  }}
+    render() {
+        const { email, password } = this.state;
+        return (
+            <Content style={styles.content}>
+                {/* SECTION WELCOME */}
+                <Mutation
+                    mutation={LOGIN_MUTATION}
+                    update={(cache, { data }) => {
+                        this.goToHomePage(data);
+                    }}
                 >
-                  {strings.enterInApp}
-                </Button>
-                <Button
-                  animation="fadeInLeft"
-                  style={styles.buttonEntrar}
-                  textStyle={styles.buttonTextEntrar}
-                  type="naked"
-                  shadow={false}
-                >
-                  {strings.forgotPassword}
-                </Button>
-              </View>
-            </View>
-          )}
-        </Mutation>
-      </Content>
-    );
-  }
+                    {addTodo => (
+                        <View>
+                            <View style={{ alignItems: 'center' }}>
+                                <AvatarCircle>
+                                    <Icon iconType="FontAwesome" name="user" size={60} />
+                                </AvatarCircle>
+                            </View>
+                            <View>
+                                <Input
+                                    textContentType="emailAddress"
+                                    onChangeText={(dataResponse) => {
+                                        this.setState({ email: dataResponse });
+                                    }}
+                                    blurOnSubmit={false}
+                                    placeholder="E-mail"
+                                    returnKeyType="next"
+                                    keyboardType="email-address"
+                                    onSubmitEditing={() => {
+                                        this.focusPassword();
+                                    }}
+                                />
+                                <Input
+                                    textContentType="password"
+                                    onChangeText={(dataResponse) => {
+                                        this.setState({ password: dataResponse });
+                                    }}
+                                    secureTextEntry
+                                    returnKeyType="done"
+                                    placeholder="Senha"
+                                />
+                                <Button
+                                    kind="rounded"
+                                    animation="fadeInRight"
+                                    onPress={() => {
+                                        addTodo({
+                                            // variables: { email: 'caiomoura1994@gmail.com', password: 'C410140311' },
+                                            variables: { email, password },
+                                        });
+                                    }}
+                                >
+                                    {strings.enterInApp}
+                                </Button>
+                                <Button
+                                    animation="fadeInLeft"
+                                    style={styles.buttonEntrar}
+                                    textStyle={styles.buttonTextEntrar}
+                                    type="naked"
+                                    shadow={false}
+                                >
+                                    {strings.forgotPassword}
+                                </Button>
+                            </View>
+                        </View>
+                    )}
+                </Mutation>
+                <FBLoginButton />
+            </Content>
+        );
+    }
 }
 
 Login.propTypes = {
-  navigation: PropTypes.any,
+    navigation: PropTypes.any,
 };
 
 export default Login;
