@@ -1,16 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableHighlight } from 'react-native';
+import { Card, CardItem, Text } from 'native-base';
 
 class Category extends React.Component {
   render() {
+    const { category, onPress } = this.props;
     return (
-      <View>
-        <Text>{this.props.name}</Text>
-        <Text>{this.props.icon}</Text>
-      </View>
+      <TouchableHighlight onPress={() => onPress(category)}>
+        <View>
+          <Card>
+            <CardItem cardBody>
+              <Image
+                source={{ uri: category.icon }}
+                style={{ height: 200, width: null, flex: 1 }}
+              />
+              <Text>{category.name}</Text>
+            </CardItem>
+          </Card>
+        </View>
+      </TouchableHighlight>
     );
   }
 }
 
+Category.propTypes = {
+  onPress: PropTypes.func,
+  category: PropTypes.object,
+};
 export default Category;

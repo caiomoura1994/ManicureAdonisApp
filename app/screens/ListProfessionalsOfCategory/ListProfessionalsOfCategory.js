@@ -7,33 +7,37 @@ import { Query } from 'react-apollo';
 import { Container, Content, Text, CardServiceProvider } from '../../components';
 
 class ListProfessionalsOfCategory extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
-    const subCategory = this.props.navigation.state.params.subCategory;
+    const { state, pop } = this.props.navigation;
+    const { subCategory } = state.params;
     const serviceQuery = gql`
       {
         searchService(subCategory: ${subCategory.key}) {
-          key:id
-          serviceId:id
-          description
-          pubDate
-          price 
-          professionalOwner {
-            key:id
-            professionalId:id
-            online
-            gender
-            biography
-            city
-            state
-            name
-            lastName
-            avatar
+          page
+          pages
+          hasPrev
+          hasNext
+          objects {
+            key: id
+            serviceId: id
+            description
+            pubDate
+            price
+            professionalOwner {
+              key: id
+              professionalId: id
+              online
+              biography
+              city
+              state
+              name
+              lastName
+              avatar
+            }
           }
         }
       }
+      
     `;
     return (
       <Container>
@@ -41,9 +45,7 @@ class ListProfessionalsOfCategory extends React.Component {
           <Left>
             <Button
               transparent
-              onPress={() => {
-                this.props.navigation.pop();
-              }}
+              onPress={() => { pop(); }}
             >
               <Icon name="arrow-back" />
             </Button>
@@ -56,18 +58,17 @@ class ListProfessionalsOfCategory extends React.Component {
         <Content>
           <Query query={serviceQuery}>
             {({
- loading, error, data, refetch, networkStatus,
-}) => {
+              loading, error, data, refetch, networkStatus,
+            }) => {
               if (networkStatus === 4) return 'Atualizando!';
               if (error) {
                 return <Text>Error :(</Text>;
               }
               if (loading) return <Text>Loading...</Text>;
 
-              const listServices = data.searchService.map((serviceItem, index) => (
-                <CardServiceProvider key={index} servicePropsParams={serviceItem} />
+              const listServices = data.searchService.objects.map((serviceItem, index) => (
+                <CardServiceProvider key={index.toString()} servicePropsParams={serviceItem} />
               ));
-              console.log(data);
               return <ScrollView>{listServices}</ScrollView>;
             }}
           </Query>
