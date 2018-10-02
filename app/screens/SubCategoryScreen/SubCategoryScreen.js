@@ -40,7 +40,7 @@ class SubCategoryScreen extends React.Component {
         <CardItem>
           <Left>
             <Thumbnail source={{ uri: subCategory.image }} />
-            <Text>{subCategory.name}</Text>
+            <Text style={{ paddingLeft: 5 }}>{subCategory.name}</Text>
           </Left>
           <Right>
             <Icon
