@@ -1,44 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
+import { Icon } from 'native-base';
 import {
   Onboarding,
   SignUp,
   Login,
   ListProfessionalsOfCategory,
-  ProfessionalOffline,
   ProfessionalProfile,
   ServiceDetail,
   SubCategoryScreen,
 } from '../screens';
-import { Home, Chat, ChatConversation, Calendar, Profile, Search } from '../screens/TabsContainer';
-// import Icon from 'react-native-vector-icons/Ionicons';
-// import { Icon } from '../components';
-import { Icon } from 'native-base';
+import { Home, ChatConversation, Profile } from '../screens/TabsContainer';
 
-const tabNavigatorProfessionals = TabNavigator(
-  {
-    ProfessionalOnline: {
-      screen: ListProfessionalsOfCategory,
-      navigationOptions: {
-        // gesturesEnabled: false,
-        header: null,
-        title: 'Profissionais Online',
-      },
-    },
-    // ProfessionalOffline: {
-    //   screen: ProfessionalOffline,
-    //   navigationOptions: {
-    // gesturesEnabled: false,
-    //     header: null,
-    //     title: 'ProfessionalOffline',
-    //   },
-    // },
-  },
-  {
-    tabBarPosition: 'top',
-    showIcon: true,
-  },
-);
 const tabNavigator = TabNavigator(
   {
     Home: {
@@ -143,7 +116,7 @@ const stackNavigator = StackNavigator(
       },
     },
     ListProfessionalsOfCategory: {
-      screen: tabNavigatorProfessionals,
+      screen: ListProfessionalsOfCategory,
       navigationOptions: {
         // gesturesEnabled: false,
         header: () => null,

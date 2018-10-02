@@ -9,7 +9,7 @@ import { Container, Content, Text, CardServiceProvider } from '../../components'
 class ListProfessionalsOfCategory extends React.Component {
   render() {
     const { state, pop } = this.props.navigation;
-    const { subCategory } = state.params;
+    const { subCategory, name } = state.params;
     const serviceQuery = gql`
       {
         searchService(subCategory: ${subCategory.key}) {
@@ -51,7 +51,7 @@ class ListProfessionalsOfCategory extends React.Component {
             </Button>
           </Left>
           <Body style={{ flex: 3 }}>
-            <Title>Custom Header</Title>
+            <Title>{subCategory.name}</Title>
           </Body>
           <Right />
         </Header>

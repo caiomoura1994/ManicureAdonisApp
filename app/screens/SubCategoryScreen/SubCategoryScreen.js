@@ -24,11 +24,13 @@ class SubCategoryScreen extends React.Component {
     super(props);
     this.state = { search: '' };
   }
-  subCategoryItem(subCategory) {
+  subCategoryItem(subCategory, index) {
     const { push } = this.props.navigation;
     const searchItem = subCategory.name.toLowerCase().indexOf(this.state.search.toLowerCase());
     return searchItem >= 0 || this.state.search === '' ? (
-      <TouchableWithoutFeedback onPress={
+      <TouchableWithoutFeedback
+        key={index.toString()}
+        onPress={
         () => push('ListProfessionalsOfCategory', {
           subCategory,
           name: 'Categorias',
@@ -38,9 +40,7 @@ class SubCategoryScreen extends React.Component {
         <CardItem>
           <Left>
             <Thumbnail source={{ uri: subCategory.image }} />
-            <Body>
-              <Text>{subCategory.name}</Text>
-            </Body>
+            <Text>{subCategory.name}</Text>
           </Left>
           <Right>
             <Icon
@@ -84,8 +84,8 @@ class SubCategoryScreen extends React.Component {
                     return <Text>Error :(</Text>;
                   }
                   if (loading) return <Text>Loading...</Text>;
-                  const listCategories = data.searchCategory.subCategories.map(subCategory =>
-                    this.subCategoryItem(subCategory));
+                  const listCategories = data.searchCategory.subCategories.map((subCategory, index) =>
+                    this.subCategoryItem(subCategory, index));
                   return listCategories;
                 }}
               </Query>
