@@ -1,60 +1,98 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import PropTypes from 'prop-types';
+import {
+  Card,
+  CardItem,
+  Thumbnail,
+  Body,
+  Left,
+  Right,
+  Icon,
+  Input,
+  Header,
+  Button,
+} from 'native-base';
 
-import { Text, AvatarCircle, Button } from '../../components';
+import { Text } from '../../components';
 
 
 class SubCategoryScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { search: '' };
+  }
+  subCategoryItem(subCategory) {
+    const { push } = this.props.navigation;
+    const searchItem = subCategory.name.toLowerCase().indexOf(this.state.search.toLowerCase());
+    return searchItem >= 0 || this.state.search === '' ? (
+      <TouchableWithoutFeedback onPress={
+        () => push('ListProfessionalsOfCategory', {
+          subCategory,
+          name: 'Categorias',
+        })
+      }
+      >
+        <CardItem>
+          <Left>
+            <Thumbnail source={{ uri: subCategory.image }} />
+            <Body>
+              <Text>{subCategory.name}</Text>
+            </Body>
+          </Left>
+          <Right>
+            <Icon
+              name="arrow-dropright"
+              style={{ fontSize: 30 }}
+            />
+          </Right>
+        </CardItem>
+      </TouchableWithoutFeedback>
+    ) : null;
+  }
   render() {
-    const { state, push } = this.props.navigation;
+    const { state, pop } = this.props.navigation;
     const { category } = state.params;
     const allSubCategoriesQuery = gql`
       {
         searchCategory(id:${category.key}) {
-            subCategories {
-                key:id
-                name
-                image
-              }
+          subCategories {
+              key:id
+              name
+              image
+            }
         }
       }
     `;
 
     return (
-      <Query query={allSubCategoriesQuery}>
-        {({ loading, error, data }) => {
-          if (error) {
-            return <Text>Error :(</Text>;
-          }
-          if (loading) return <Text>Loading...</Text>;
-          const listCategories = data.searchCategory.subCategories.map(subCategory => (
-            <View>
-              <AvatarCircle>
-                <Image
-                  style={{ width: 50, height: 50 }}
-                  source={{
-                    uri: subCategory.image,
-                  }}
-                />
-              </AvatarCircle>
-              <Button
-                onPress={() =>
-                  push('ListProfessionalsOfCategory', {
-                    subCategory,
-                    name: 'Categorias',
-                  })
-                }
-              >
-                {subCategory.name}
-              </Button>
-            </View>
-          ));
-          return listCategories;
-        }}
-      </Query>
+      <View style={{ paddingBottom: 60 }}>
+        <Header searchBar rounded>
+          <Button onPress={() => pop()}>
+            <Text style={{ color: 'white' }}>Voltar</Text>
+          </Button>
+          <Input placeholder="Pesquisar" onChangeText={search => this.setState({ search })} />
+        </Header>
+        <ScrollView>
+          <View>
+            <Card>
+              <Query query={allSubCategoriesQuery}>
+                {({ loading, error, data }) => {
+                  if (error) {
+                    return <Text>Error :(</Text>;
+                  }
+                  if (loading) return <Text>Loading...</Text>;
+                  const listCategories = data.searchCategory.subCategories.map(subCategory =>
+                    this.subCategoryItem(subCategory));
+                  return listCategories;
+                }}
+              </Query>
+            </Card>
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }

@@ -32,9 +32,9 @@ export default class FBLoginButton extends Component {
           onLoginFinished={
             (error, result) => {
               if (error) {
-                alert("login has error: " + result.error);
+                alert(`login has error: ${result.error}`);
               } else if (result.isCancelled) {
-                alert("login is cancelled by user.");
+                alert('login is cancelled by user.');
               } else {
                 AccessToken.getCurrentAccessToken().then((data) => {
                   const { accessToken } = data;
@@ -43,7 +43,7 @@ export default class FBLoginButton extends Component {
               }
             }
           }
-          onLogoutFinished={() => alert('Logged out')} 
+          onLogoutFinished={() => alert('Logged out')}
         />
       </View>
     );
