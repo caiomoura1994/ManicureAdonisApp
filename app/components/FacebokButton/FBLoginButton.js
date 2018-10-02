@@ -3,27 +3,28 @@ import { View } from 'react-native';
 import { LoginButton, LoginManager, AccessToken } from 'react-native-fbsdk';
 
 export default class FBLoginButton extends Component {
-  facebookAuth() {
-    LoginManager.logInWithReadPermissions(['public_profile']).then(result => {
-      console.log(result);
-      AccessToken.getCurrentAccessToken().then((data) => {
-        const { accessToken } = data;
-        this.initUser(accessToken);
-      })
-    })
-  }
-  initUser(token) {
-    console.log(token);
+  initUser() {
     // https://developers.facebook.com/docs/graph-api/reference/v2.2/user
-    fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
-      .then((response) => response.json())
+    fetch(`https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=${this.token}`)
+      .then(response => response.json())
       .then((json) => {
         console.log(json);
       })
       .catch((ERR) => {
         console.log(ERR);
-      })
+      });
   }
+  facebookAuth() {
+    LoginManager.logInWithReadPermissions(['public_profile']).then((result) => {
+      console.log(result);
+      AccessToken.getCurrentAccessToken().then((data) => {
+        const { accessToken } = data;
+        this.token = accessToken;
+        this.initUser();
+      });
+    });
+  }
+
   render() {
     return (
       <View>
@@ -38,12 +39,12 @@ export default class FBLoginButton extends Component {
                 AccessToken.getCurrentAccessToken().then((data) => {
                   const { accessToken } = data;
                   this.initUser(accessToken);
-                }
-                )
+                });
               }
             }
           }
-          onLogoutFinished={() => alert('Logged out')} />
+          onLogoutFinished={() => alert('Logged out')} 
+        />
       </View>
     );
   }
