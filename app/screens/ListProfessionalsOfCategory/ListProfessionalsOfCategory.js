@@ -3,16 +3,17 @@ import { Header, Left, Icon, Right, Body, Button, Title, Thumbnail } from 'nativ
 import { ScrollView } from 'react-native';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-
+import PropTypes from 'prop-types';
 import { Container, Content, Text, CardServiceProvider } from '../../components';
+
 
 class ListProfessionalsOfCategory extends React.Component {
   render() {
     const { state, pop } = this.props.navigation;
-    const { subCategory, name } = state.params;
+    const { subCategory: { name, image, key } } = state.params;
     const serviceQuery = gql`
       {
-        searchService(subCategory: ${subCategory.key}) {
+        searchService(subCategory: ${key}) {
           page
           pages
           hasPrev
@@ -51,10 +52,10 @@ class ListProfessionalsOfCategory extends React.Component {
             </Button>
           </Left>
           <Body style={{ flex: 3 }}>
-            <Title>{subCategory.name}</Title>
+            <Title>{name}</Title>
           </Body>
           <Right>
-            <Thumbnail small source={{ uri: subCategory.image }} />
+            <Thumbnail small source={{ uri: image }} />
           </Right>
         </Header>
         <Content>
@@ -80,4 +81,7 @@ class ListProfessionalsOfCategory extends React.Component {
   }
 }
 
+ListProfessionalsOfCategory.propTypes = {
+  navigation: PropTypes.object,
+};
 export default ListProfessionalsOfCategory;
