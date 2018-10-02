@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Left, Icon, Right, Body, Button, Title } from 'native-base';
+import { Header, Left, Icon, Right, Body, Button, Title, Thumbnail } from 'native-base';
 import { ScrollView } from 'react-native';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
@@ -53,7 +53,9 @@ class ListProfessionalsOfCategory extends React.Component {
           <Body style={{ flex: 3 }}>
             <Title>{subCategory.name}</Title>
           </Body>
-          <Right />
+          <Right>
+            <Thumbnail small source={{ uri: subCategory.image }} />
+          </Right>
         </Header>
         <Content>
           <Query query={serviceQuery}>
