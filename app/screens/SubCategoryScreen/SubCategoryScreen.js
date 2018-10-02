@@ -79,12 +79,12 @@ class SubCategoryScreen extends React.Component {
           <View>
             <Card>
               <Query query={allSubCategoriesQuery}>
-                {({ loading, error, data }) => {
+                {({ loading, error, data: { searchCategory: { subCategories } } }) => {
                   if (error) {
                     return <Text>Error :(</Text>;
                   }
                   if (loading) return <Text>Loading...</Text>;
-                  const listCategories = data.searchCategory.subCategories.map((subCategory, index) =>
+                  const listCategories = subCategories.map((subCategory, index) =>
                     this.subCategoryItem(subCategory, index));
                   return listCategories;
                 }}
