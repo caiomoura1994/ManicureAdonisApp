@@ -10,7 +10,7 @@ import styles from './styles';
 import { Content, Button, Input, AvatarCircle, Icon } from '../../components';
 
 const LOGIN_MUTATION = gql`
-  mutation addTodo($email: String!, $password: String!) {
+  mutation doLogin($email: String!, $password: String!) {
     login(loginInput: { username: $email, password: $password }) {
       id
       biography
@@ -57,7 +57,7 @@ class Login extends React.Component {
                         this.goToHomePage(data);
                     }}
                 >
-                    {addTodo => (
+                    {doLogin => (
                         <View>
                             <View style={{ alignItems: 'center' }}>
                                 <AvatarCircle>
@@ -70,6 +70,7 @@ class Login extends React.Component {
                                     onChangeText={(dataResponse) => {
                                         this.setState({ email: dataResponse });
                                     }}
+                                    autoCapitalize={'none'}
                                     blurOnSubmit={false}
                                     placeholder="E-mail"
                                     returnKeyType="next"
@@ -86,12 +87,18 @@ class Login extends React.Component {
                                     secureTextEntry
                                     returnKeyType="done"
                                     placeholder="Senha"
+                                    onSubmitEditing={() => {
+                                        doLogin({
+                                            // variables: { email: 'caiomoura1994@gmail.com', password: 'C410140311' },
+                                            variables: { email, password },
+                                        });
+                                    }}
                                 />
                                 <Button
                                     kind="rounded"
                                     animation="fadeInRight"
                                     onPress={() => {
-                                        addTodo({
+                                        doLogin({
                                             // variables: { email: 'caiomoura1994@gmail.com', password: 'C410140311' },
                                             variables: { email, password },
                                         });
